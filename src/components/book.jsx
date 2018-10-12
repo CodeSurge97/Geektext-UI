@@ -2,48 +2,36 @@ import React, { Component } from 'react';
 
 class Book extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            data: [],
+            title: this.props.title,
+            author: this.props.author,
+            price: this.props.price,
+            img: this.props.image,
+            isbn: this.props.isbn
         }
-    }
-
-    componentDidMount(){
-        fetch('http://localhost:5000/books')
-        .then(res => res.json())
-        .then(json => {
-            this.setState({
-                data: json,
-            })
-        });
     }
 
     render() {
-        const style = {
-            backgroundColor : 'orange'
-        }
+
         return (
-            <div class="container">
-                <ul className='list-group'>
-                    {this.state.data.map(book => (
-                        <li style={style} className='list-group-item d-flex justify-content-between align-items-center m-2'>
-                            <div class="container">
-                                <h1>{book.title}</h1>
-                                <img src={"http://localhost:5000" + book.img} width="125" height="150" className="float-left img-thumbnail"/>
-                                    <div>
-                                        <dl>
-                                            <dt>Author</dt>
-                                            <dd>{book.author}</dd>
-                                            <dt>Price</dt>
-                                            <dd>{book.price}</dd>
-                                        </dl>
-                                        <button>More Info</button>
-                                    </div>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+            <div className="jumbotron">
+                <h1>{this.state.title}</h1>
+                    <div className="container">
+                        <img src={"http://localhost:5000" + this.state.img} alt={this.state.img} width="125" height="150" className="float-left img-thumbnail"/>
+                        <div>
+                            <span>Author: </span>
+                            <span>{this.state.author}</span>
+                        </div>
+                        <div>
+                            <span>Price: </span>
+                            <span>{this.state.price}</span>
+                        </div>
+                        <form action={"http://localhost:3000/book/" + this.state.isbn}>
+                            <input type="submit" value="More Info" />
+                        </form>
+                    </div>
             </div>
         );
     }
