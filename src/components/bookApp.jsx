@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Comment from './comment'
+import AddComment from "./addComment"
 
 class BookApp extends Component {
 
@@ -7,7 +9,12 @@ class BookApp extends Component {
         this.state = {
             isbn: this.props.match.params.isbn,
             book: {},
+            comments: [],
+            width: 125,
+            height: 150,
         }
+        this.enlarge = this.enlarge.bind(this);
+        this.minimize = this.minimize.bind(this);
     }
 
     componentDidMount(){
@@ -17,7 +24,27 @@ class BookApp extends Component {
         .then(json => {
             this.setState({
                 book: json,
+                comments: json.comments,
             })
+        });
+    }
+
+    enlarge(event){
+
+        this.setState({
+            width: 125*2,
+            height: 150*2,
+        }, () => {
+            document.addEventListener('click', this.minimize);
+        });
+    }
+
+    minimize(){
+        this.setState({
+            width: 125,
+            height: 150,
+        }, () => {
+          document.removeEventListener('click', this.minimize);
         });
     }
 
@@ -26,7 +53,7 @@ class BookApp extends Component {
             <div>
             <h1>{this.state.book.title}</h1>
                 <div className="container">
-                    <img src={"http://localhost:5000" + this.state.book.img} alt={this.state.book.img} width="125" height="150" className="float-left img-thumbnail"/>
+                    <img onClick={() => {this.enlarge()}} src={"http://localhost:5000" + this.state.book.img} alt={this.state.book.img} width={this.state.width} height={this.state.height} className="float-left img-thumbnail"/>
                     <div>
                         <span>Author: </span>
                         <span>{this.state.book.author}</span>
@@ -50,6 +77,14 @@ class BookApp extends Component {
                     <div>
                         <h2>Comments: </h2>
                         {/*maybe create a comments component and inside of that a comment component like in books*/}
+                        {this.state.comments.map(comment => (
+                            <div key={comment.id}>
+                                <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} username={comment.username}/>
+                            </div>
+                        ))}
+                        <div>
+                            <AddComment />
+                        </div>
                     </div>
                 </div>
             </div>
