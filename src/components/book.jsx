@@ -16,22 +16,24 @@ class Book extends Component {
     render() {
 
         return (
-            <div className="jumbotron">
-                <h1>{this.state.title}</h1>
-                    <div className="container">
-                        <img src={"http://localhost:5000" + this.state.img} alt={this.state.img} width="125" height="150" className="float-left img-thumbnail"/>
+            <div className="row justify-content-center">
+            <div className="jumbotron col-lg-9 col-md-3 col-sm-3 col-xs-12" >
+                    <div className="container text-center">
+                    <img src={"http://localhost:5000" + this.state.img} alt={this.state.img} width="125" height="150" className="float-left img-thumbnail"/>
+                    <h1>{this.state.title}</h1>
                         <div>
-                            <span>Author: </span>
+                            <span><b>Author: </b></span>
                             <span>{this.state.author}</span>
                         </div>
                         <div>
-                            <span>Price: </span>
+                            <span><b>Price: </b></span>
                             <span>{this.state.price}</span>
                         </div>
                         <form action={"http://localhost:3000/book/" + this.state.isbn}>
-                            <input type="submit" value="More Info" />
+                            <input className="btn btn-default" type="submit" value="More Info" />
                         </form>
                     </div>
+            </div>
             </div>
         );
     }

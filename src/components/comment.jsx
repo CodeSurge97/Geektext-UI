@@ -14,13 +14,16 @@ class Comment extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <div>
                     <span>{this.state.username} </span>
                     <span>{this.state.date} </span>
                 </div>
                 <div>
-                    <h3>{this.state.rating} </h3>
+                    <span>Rating: </span>
+                    <span>{this.state.rating}</span>
+                </div>
+                <div>
                     <p>{this.state.contents}</p>
                 </div>
             </div>

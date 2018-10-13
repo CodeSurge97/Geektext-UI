@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Book from './book';
 
-class Books extends Component {
+class BookList extends Component {
 
     constructor(props){
         super(props);
@@ -15,25 +15,9 @@ class Books extends Component {
             sortByRatingA: false,
             library: [],
         }
-        this.showMenu = this.showMenu.bind(this);
-        this.closeMenu = this.closeMenu.bind(this);
         this.fetchLibrary = this.fetchLibrary.bind(this);
 
     }
-    showMenu(event) {
-        event.preventDefault();
-
-        this.setState({ showMenu: true }, () => {
-        document.addEventListener('click', this.closeMenu);
-        });
-    }
-
-    closeMenu() {
-        this.setState({ showMenu: false }, () => {
-          document.removeEventListener('click', this.closeMenu);
-        });
-    }
-
     componentDidMount(){
         fetch('http://localhost:5000/books')
         .then(res => res.json())
@@ -126,27 +110,20 @@ class Books extends Component {
     render() {
         return (
             <div>
-                <div className="dropdown">
-                    {/* This is for the sorting functionality */}
-                    <button onClick={this.showMenu} className="dropbtn">Sort By</button>
-                    {
-                      this.state.showMenu
-                        ? (
-                          <div>
-                            <ul>
-                                <li><button onClick={() => { this.fetchLibrary('priceD') }}> Sort by price (descending)</button></li>
-                                <li><button onClick={() => { this.fetchLibrary('priceA') }}> Sort by price (ascending)</button></li>
-                                <li><button onClick={() => { this.fetchLibrary('ratingD') }}> Sort by rating (descending)</button></li>
-                                <li><button onClick={() => { this.fetchLibrary('ratingA') }}> Sort by rating (ascending) </button></li>
-                                <li><button onClick={() => { this.fetchLibrary('Author') }}> Sort by author </button></li>
-                                <li><button onClick={() => { this.fetchLibrary('title') }}> Sort by title </button></li>
-                            </ul>
-                          </div>
-                        )
-                        : (
-                          null
-                        )
-                    }
+                <div className="row justify-content-end">
+                    <div className="btn-group dropleft">
+                        {/* This is for the sorting functionality */}
+                        <button onClick={this.showMenu} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('priceD') }}>Price (descending)</a>
+                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('priceA') }}>Price (ascending)</a>
+                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('ratingD') }}>Rating (descending)</a>
+                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('ratingA') }}>Rating (ascending) </a>
+                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('Author') }}>Author </a>
+                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('title') }}>Title </a>
+                        </div>
+
+                    </div>
                 </div>
                 {/* This part is to show the list of books */}
                 {this.state.library.map(book => (
@@ -160,4 +137,4 @@ class Books extends Component {
 
 }
 
-export default Books;
+export default BookList;

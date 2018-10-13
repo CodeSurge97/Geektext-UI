@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Books from './books';
-import './display.css';
+import BookList from './bookList';
 
 class DisplayApp extends Component {
 
         render() {
             return (
                 <div>
-                    <Books />
+                    <BookList />
                 </div>
             );
         }

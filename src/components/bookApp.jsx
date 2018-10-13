@@ -10,8 +10,8 @@ class BookApp extends Component {
             isbn: this.props.match.params.isbn,
             book: {},
             comments: [],
-            width: 125,
-            height: 150,
+            width: 225,
+            height: 250,
         }
         this.enlarge = this.enlarge.bind(this);
         this.minimize = this.minimize.bind(this);
@@ -25,6 +25,7 @@ class BookApp extends Component {
             this.setState({
                 book: json,
                 comments: json.comments,
+                author_id: json.author_id,
             })
         });
     }
@@ -32,58 +33,73 @@ class BookApp extends Component {
     enlarge(event){
 
         this.setState({
-            width: 125*2,
-            height: 150*2,
+            width: 225 * 2,
+            height: 250 * 2,
         }, () => {
             document.addEventListener('click', this.minimize);
         });
     }
 
     minimize(){
+        console.log(this.state.width)
+        console.log(((this.state.width) / 2.0))
+
         this.setState({
-            width: 125,
-            height: 150,
+            width: 225,
+            height: 250,
         }, () => {
           document.removeEventListener('click', this.minimize);
         });
     }
 
     render() {
+
+        let styles = {
+            padding: '5px',
+            backgroundColor: 'white',
+        }
         return (
             <div>
             <h1>{this.state.book.title}</h1>
-                <div className="container">
-                    <img onClick={() => {this.enlarge()}} src={"http://localhost:5000" + this.state.book.img} alt={this.state.book.img} width={this.state.width} height={this.state.height} className="float-left img-thumbnail"/>
-                    <div>
-                        <span>Author: </span>
-                        <span>{this.state.book.author}</span>
+                <div className="row">
+                    <div className="container" style={styles}>
+                        <div className="col-lg-9 col-md-3 col-sm-3 col-xs-12">
+                            <img onClick={() => {this.enlarge()}} src={"http://localhost:5000" + this.state.book.img} alt={this.state.book.img} width={this.state.width} height={this.state.height} className="float-left img-thumbnail"/>
+                        </div>
+                        <div className="row justify-content-end jumbotron" style={styles}>
+                            <div className="container" style={styles}>
+                                <span>Author: </span>
+                                <a href={"http://localhost:3000/author/" + this.state.author_id}>{this.state.book.author}</a>
+                            </div>
+                            <div className="container" style={styles}>
+                                <span>Price: </span>
+                                <span>{this.state.book.price}</span>
+                            </div>
+                            <div className="container" style={styles}>
+                                <span>Average Rating: </span>
+                                <span>{this.state.book.rating}</span>
+                            </div>
+                            <div className="container" style={styles}>
+                                <span>Genre: </span>
+                                <span>{this.state.book.genre}</span>
+                            </div>
+                            <div className="container" style={styles}>
+                                <span>Description: </span>
+                                <span>{this.state.book.description}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <span>Price: </span>
-                        <span>{this.state.book.price}</span>
-                    </div>
-                    <div>
-                        <span>Average Rating: </span>
-                        <span>{this.state.book.rating}</span>
-                    </div>
-                    <div>
-                        <span>Genre: </span>
-                        <span>{this.state.book.genre}</span>
-                    </div>
-                    <div>
-                        <span>Description: </span>
-                        <span>{this.state.book.description}</span>
-                    </div>
-                    <div>
-                        <h2>Comments: </h2>
+
+                    <div className="container">
+                        <h3 className="jumbotron" style={styles}>Comments: </h3>
                         {/*maybe create a comments component and inside of that a comment component like in books*/}
                         {this.state.comments.map(comment => (
-                            <div key={comment.id}>
+                            <div className="jumbotron" style={styles} key={comment.id}>
                                 <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} username={comment.username}/>
                             </div>
                         ))}
-                        <div>
-                            <AddComment />
+                        <div className="jumbotron" style={styles}>
+                            <AddComment isbn={this.state.isbn}/>
                         </div>
                     </div>
                 </div>
