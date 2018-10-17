@@ -20,7 +20,7 @@ class Book extends Component {
             <div className="jumbotron col-lg-9 col-md-3 col-sm-3 col-xs-12" >
                     <div className="container text-center">
                     <img src={"http://localhost:5000" + this.state.img} alt={this.state.img} width="125" height="150" className="float-left img-thumbnail"/>
-                    <h1>{this.state.title}</h1>
+                    <h3>{this.state.title}</h3>
                         <div>
                             <span><b>Author: </b></span>
                             <span>{this.state.author}</span>

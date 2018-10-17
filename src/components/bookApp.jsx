@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Comment from './comment'
 import AddComment from "./addComment"
+import PropTypes from 'prop-types';
 
 class BookApp extends Component {
 
@@ -12,9 +13,11 @@ class BookApp extends Component {
             comments: [],
             width: 225,
             height: 250,
+            url: 'http://localhost:5000/add-to-cart/',
         }
         this.enlarge = this.enlarge.bind(this);
         this.minimize = this.minimize.bind(this);
+        this.addItemToShoppingCart = this.addItemToShoppingCart.bind(this);
     }
 
     componentDidMount(){
@@ -52,6 +55,23 @@ class BookApp extends Component {
         });
     }
 
+    addItemToShoppingCart(){
+        this.props.callbackFromParent(this.state.isbn)
+        fetch((this.state.url + (Math.floor(Math.random()*5 + 1))), {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            isbn: this.state.isbn,
+
+          })
+        })
+
+
+    }
+
     render() {
 
         let styles = {
@@ -74,6 +94,9 @@ class BookApp extends Component {
                             <div className="container" style={styles}>
                                 <span>Price: </span>
                                 <span>{this.state.book.price}</span>
+                            </div>
+                            <div className="btn">
+                                <a onClick={this.addItemToShoppingCart}>Add to cart</a>
                             </div>
                             <div className="container" style={styles}>
                                 <span>Average Rating: </span>

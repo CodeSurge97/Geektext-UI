@@ -110,10 +110,12 @@ class BookList extends Component {
     render() {
         return (
             <div>
+                <div className="col">
                 <div className="row justify-content-end">
+
                     <div className="btn-group dropleft">
                         {/* This is for the sorting functionality */}
-                        <button onClick={this.showMenu} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
+                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                               <a className="dropdown-item" onClick={() => { this.fetchLibrary('priceD') }}>Price (descending)</a>
                               <a className="dropdown-item" onClick={() => { this.fetchLibrary('priceA') }}>Price (ascending)</a>
@@ -124,6 +126,7 @@ class BookList extends Component {
                         </div>
 
                     </div>
+                </div>
                 </div>
                 {/* This part is to show the list of books */}
                 {this.state.library.map(book => (
