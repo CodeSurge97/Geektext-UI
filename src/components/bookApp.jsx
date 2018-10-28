@@ -13,7 +13,7 @@ class BookApp extends Component {
             comments: [],
             width: 225,
             height: 250,
-            url: 'http://localhost:5000/add-to-cart/',
+            url: 'http://localhost:5000/add-to-cart/20',
         }
         this.enlarge = this.enlarge.bind(this);
         this.minimize = this.minimize.bind(this);
@@ -57,7 +57,7 @@ class BookApp extends Component {
 
     addItemToShoppingCart(){
         this.props.callbackFromParent(this.state.isbn)
-        fetch((this.state.url + (Math.floor(Math.random()*5 + 1))), {
+        fetch((this.state.url), {
           method: 'POST',
           headers: {
             'Accept': 'application/json',

@@ -59,7 +59,7 @@ class NavigationBar extends Component {
                         <div>
                             {this.state.showCart
                                 ?
-                                <ShoppingCart isbn={this.props.isbn}/>
+                                <ShoppingCart/>
                                 :
                                 null
                             }

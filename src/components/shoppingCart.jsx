@@ -6,17 +6,27 @@ class ShoppingCart extends Component {
         this.state = {
             username: '',
             items: [],
+            url: 'http://localhost:5000/get-cart/20',
         }
     }
     componentDidMount(){
         console.log("mounting the shopping cart");
+        fetch(this.state.url)
+        .then(res => res.json())
+        .then(json => {
+            this.setState({
+                items: json,
+            })
+        });
     }
 
     render() {
         return (
             <div className="container">
-                {console.log(this.props.isbn)}
-                <a>{this.props.isbn}</a>
+            {this.state.items.map(item => (
+                    <div> {item.book}
+                </div>
+            ))}
             </div>
         );
     }

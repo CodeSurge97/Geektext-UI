@@ -5,6 +5,8 @@ import BookApp from './bookApp';
 import AuthorApp from './authorApp';
 import { BrowserRouter, Route } from 'react-router-dom';
 import NavigationBar from './navigationBar'
+import BookList from './bookList';
+
 
 class App extends Component {
     constructor(props){
@@ -20,8 +22,6 @@ class App extends Component {
         this.setState({
             dataFromChild: data,
         });
-
-
     }
 
     render() {
@@ -31,10 +31,10 @@ class App extends Component {
                  <div className="sticky-top">
                     <NavigationBar isbn={this.state.dataFromChild} />
                  </div>
-                 <Route path={"/books"} component={DisplayApp} />
+                 <Route path={"/books"} render={() => <BookList callbackFromParent={this.myCallback}/>} />
                  <Route path={"/book/:isbn"} render={(routeProps) => <BookApp {...routeProps} callbackFromParent={this.myCallback}/>} />
-                 <Route path={"/author/:id"} component={AuthorApp} />
-                 
+                 <Route path={"/author/:id"} component={AuthorApp}/>
+
              </div>
             </BrowserRouter>
         );

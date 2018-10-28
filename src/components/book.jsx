@@ -9,8 +9,23 @@ class Book extends Component {
             author: this.props.author,
             price: this.props.price,
             img: this.props.image,
-            isbn: this.props.isbn
+            isbn: this.props.isbn,
+            url: 'http://localhost:5000/add-to-cart/20',
         }
+        this.addItemToShoppingCart = this.addItemToShoppingCart.bind(this);
+    }
+    addItemToShoppingCart(){
+        this.props.callbackFromParent(this.state.isbn)
+        fetch((this.state.url), {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            isbn: this.state.isbn,
+          })
+        })
     }
 
     render() {
@@ -32,6 +47,9 @@ class Book extends Component {
                         <form action={"http://localhost:3000/book/" + this.state.isbn}>
                             <input className="btn btn-default" type="submit" value="More Info" />
                         </form>
+                        <div className="btn">
+                            <a onClick={this.addItemToShoppingCart}>Add to cart</a>
+                        </div>
                     </div>
             </div>
             </div>
