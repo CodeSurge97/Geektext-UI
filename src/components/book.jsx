@@ -10,7 +10,7 @@ class Book extends Component {
             price: this.props.price,
             img: this.props.image,
             isbn: this.props.isbn,
-            url: 'http://localhost:5000/add-to-cart/20',
+            url: 'http://localhost:5000/add-to-cart/1',
         }
         this.addItemToShoppingCart = this.addItemToShoppingCart.bind(this);
     }

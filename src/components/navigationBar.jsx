@@ -32,7 +32,6 @@ class NavigationBar extends Component {
     render() {
         let styles = {
             padding: '10px',
-            backgroundColor: 'red'
          };
         return (
             <div>

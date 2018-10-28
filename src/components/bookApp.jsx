@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Comment from './comment'
 import AddComment from "./addComment"
 import PropTypes from 'prop-types';
+import ShowMore from 'react-show-more';
 
 class BookApp extends Component {
 
@@ -13,7 +14,7 @@ class BookApp extends Component {
             comments: [],
             width: 225,
             height: 250,
-            url: 'http://localhost:5000/add-to-cart/20',
+            url: 'http://localhost:5000/add-to-cart/1',
         }
         this.enlarge = this.enlarge.bind(this);
         this.minimize = this.minimize.bind(this);
@@ -87,28 +88,42 @@ class BookApp extends Component {
                             <img onClick={() => {this.enlarge()}} src={"http://localhost:5000" + this.state.book.img} alt={this.state.book.img} width={this.state.width} height={this.state.height} className="float-left img-thumbnail"/>
                         </div>
                         <div className="row justify-content-end jumbotron" style={styles}>
-                            <div className="container" style={styles}>
-                                <span>Author: </span>
-                                <a href={"http://localhost:3000/author/" + this.state.author_id}>{this.state.book.author}</a>
-                            </div>
-                            <div className="container" style={styles}>
-                                <span>Price: </span>
-                                <span>{this.state.book.price}</span>
-                            </div>
                             <div className="btn">
                                 <a onClick={this.addItemToShoppingCart}>Add to cart</a>
                             </div>
                             <div className="container" style={styles}>
-                                <span>Average Rating: </span>
+                                <span style={{fontSize: 20}}>Author: </span>
+                                <a href={"http://localhost:3000/author/" + this.state.author_id}>{this.state.book.author}</a>
+                            </div>
+                            <div className="container" style={styles}>
+                                <span style={{fontSize: 20}}>Price: </span>
+                                <span>{this.state.book.price}</span>
+                            </div>
+                            <div className="container" style={styles}>
+                                <span style={{fontSize: 20}}>Average Rating: </span>
                                 <span>{this.state.book.rating}</span>
                             </div>
                             <div className="container" style={styles}>
-                                <span>Genre: </span>
+                                <span style={{fontSize: 20}}>Genre: </span>
                                 <span>{this.state.book.genre}</span>
                             </div>
                             <div className="container" style={styles}>
-                                <span>Description: </span>
+                            <div style={{fontSize: 20}}> About the author:</div>
+                            <ShowMore
+                                lines={2}
+                                more='Show more'
+                                less='Show less'
+                                anchorClass=''>
+                                <span>{this.state.book.author_info}</span>
+                            </ShowMore>
+                            <span style={{fontSize: 20}}>Description: </span>
+                            <ShowMore
+                                lines={2}
+                                more='Show more'
+                                less='Show less'
+                                anchorClass=''>
                                 <span>{this.state.book.description}</span>
+                            </ShowMore>
                             </div>
                         </div>
                     </div>

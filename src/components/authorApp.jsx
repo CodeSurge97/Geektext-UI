@@ -8,6 +8,7 @@ class AuthorApp extends Component {
             author_id: this.props.match.params.id,
             author: {},
             books: [],
+            img: '',
         }
     }
 
@@ -19,6 +20,7 @@ class AuthorApp extends Component {
             this.setState({
                 author: json,
                 books: json.books,
+                img: json.author_pic
             })
         });
     }
@@ -31,19 +33,24 @@ class AuthorApp extends Component {
             <div>
                 <title>Books by {this.state.author.name}</title>
                 <h1>{this.state.author.name}</h1>
-                <div className="jumbotron" style={{backgroundColor: 'white',}}>
-                    <span><b>Author Info:</b> </span>
-                    <span>{this.state.author.author_info}</span>
+                <div className="jumbotron" style={{backgroundColor: 'white', padding: '10px',}}>
+                    <div className="col-lg-9 col-md-3 col-sm-3 col-xs-12">
+                        <img onClick={() => {this.enlarge()}} src={"http://localhost:5000/static/" + this.state.img} alt={this.state.img} width={250} height={300} className="float-left img-thumbnail"/>
+                    </div>
+                    <div className="jumbotron" style={{backgroundColor: 'white',}}>
+                        <span><b>Author Info:</b> </span>
+                        <span>{this.state.author.author_info}</span>
+                    </div>
                 </div>
 
-                <div>
+                <div className="jumbotron" style={{backgroundColor: 'white', padding: '10px'}}>
                 {/* This part is to show the list of books */}
+                <h2 className="jumbotron" style={{backgroundColor: 'white'}}> Books by {this.state.author.name}: </h2>
                 {this.state.books.map(book => (
                     <div key={book.isbn}>
                         <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img}/>
                     </div>
                 ))}
-
                 </div>
 
             </div>

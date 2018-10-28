@@ -6,7 +6,7 @@ class ShoppingCart extends Component {
         this.state = {
             username: '',
             items: [],
-            url: 'http://localhost:5000/get-cart/20',
+            url: 'http://localhost:5000/get-cart/1',
         }
     }
     componentDidMount(){
@@ -24,8 +24,7 @@ class ShoppingCart extends Component {
         return (
             <div className="container">
             {this.state.items.map(item => (
-                    <div> {item.book}
-                </div>
+                    <div> {item.book} </div>
             ))}
             </div>
         );
