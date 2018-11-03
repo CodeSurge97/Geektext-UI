@@ -14,7 +14,7 @@ class Comment extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <div>
                     <span>{this.state.username} </span>
                     <span>{this.state.date} </span>

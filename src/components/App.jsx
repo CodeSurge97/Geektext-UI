@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import DisplayApp from './displayApp';
-import BookApp from './bookApp';
-import AuthorApp from './authorApp';
+import BookPage from './bookPage';
+import AuthorPage from './authorPage';
 import { BrowserRouter, Route } from 'react-router-dom';
 import NavigationBar from './navigationBar'
 import BookList from './bookList';
@@ -12,28 +11,28 @@ class App extends Component {
     constructor(props){
         super(props);
         this.state = {
-            dataFromChild: null,
+            sortBy: 'title',
         }
-        this.myCallback = this.myCallback.bind(this);
+        this.updateSorting = this.updateSorting.bind(this);
     }
 
-    myCallback(data){
-        console.log(data);
+    updateSorting(option){
+        console.log("this is from the sorting function in the parent")
         this.setState({
-            dataFromChild: data,
+            sortBy: option,
         });
     }
 
     render() {
         return (
             <BrowserRouter>
-             <div className="container">
+             <div>
                  <div className="sticky-top">
-                    <NavigationBar isbn={this.state.dataFromChild} />
+                    <NavigationBar isbn={this.state.dataFromChild} callbackFromParent={this.updateSorting}/>
                  </div>
-                 <Route path={"/books"} render={() => <BookList callbackFromParent={this.myCallback}/>} />
-                 <Route path={"/book/:isbn"} render={(routeProps) => <BookApp {...routeProps} callbackFromParent={this.myCallback}/>} />
-                 <Route path={"/author/:id"} component={AuthorApp}/>
+                 <Route path={"/books"} render={() => <BookList sortBy={this.state.sortBy}/>} />
+                 <Route path={"/book/:isbn"} render={(routeProps) => <BookPage {...routeProps} callbackFromParent={this.myCallback}/>} />
+                 <Route path={"/author/:id"} component={AuthorPage}/>
 
              </div>
             </BrowserRouter>

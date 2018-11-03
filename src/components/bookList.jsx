@@ -7,17 +7,10 @@ class BookList extends Component {
         super(props);
         this.state = {
             showMenu: false,
-            sortByPriceA: false,
-            sortByTitle: false,
-            sortByPriceD: false,
-            sortByAuthor: false,
-            sortByRatingD: false,
-            sortByRatingA: false,
             library: [],
-            dataFromChild: '',
+            sortBy: this.props.sortBy,
         }
         this.fetchLibrary = this.fetchLibrary.bind(this);
-        this.myCallback = this.myCallback.bind(this);
 
     }
     componentDidMount(){
@@ -29,138 +22,49 @@ class BookList extends Component {
             })
         });
     }
-    myCallback(data){
-        console.log(data);
-        this.setState({
-            dataFromChild: data,
+
+    fetchLibrary(sortBy){
+        console.log("fetching data by" + sortBy)
+        let url = 'http://localhost:5000/books';
+        if(sortBy === 'priceD'){
+            url = 'http://localhost:5000/book/by-price-d';
+        }else if(sortBy === 'priceA'){
+            url = 'http://localhost:5000/book/by-price-a';
+        }else if(sortBy === 'ratingD'){
+            url = 'http://localhost:5000/book/by-rating-d';
+
+        }else if(sortBy === 'ratingA'){
+            url = 'http://localhost:5000/book/by-rating-a';
+        }else if(sortBy === 'author'){
+            url = 'http://localhost:5000/book/by-author';
+        }
+        fetch(url).then(res => res.json())
+        .then(json => {
+            this.setState({
+                library: json,
+            })
         });
     }
 
-    fetchLibrary(sortBy){
-        if(sortBy === 'priceD'){
-            console.log("fetching data for dort by price desc");
-            fetch('http://localhost:5000/book/by-price-d')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    library: json,
-                    sortByPriceA: false,
-                    sortByPriceD: true,
-                    sortByAuthor: false,
-                    sortByRatingD: false,
-                    sortByRatingA: false,
-                    sortByTitle: false,
-                })
-            });
-        }else if(sortBy === 'priceA'){
-            console.log("fetching data for sort by price Asc");
-            fetch('http://localhost:5000/book/by-price-a')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    library: json,
-                    sortByPriceA: true,
-                    sortByPriceD: false,
-                    sortByAuthor: false,
-                    sortByRatingD: false,
-                    sortByRatingA: false,
-                    sortByTitle: false,
-                })
-            });
-        }else if(sortBy === 'ratingD'){
-            console.log("fetching data for sort by rating Desc");
-            fetch('http://localhost:5000/book/by-rating-d')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    library: json,
-                    sortByPriceA: false,
-                    sortByPriceD: false,
-                    sortByAuthor: false,
-                    sortByRatingD: true,
-                    sortByRatingA: false,
-                    sortByTitle: false,
-                })
-            });
-        }else if(sortBy === 'ratingA'){
-            console.log("fetching data for sort by rating Asc");
-            fetch('http://localhost:5000/book/by-rating-a')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    library: json,
-                    sortByPriceA: false,
-                    sortByPriceD: false,
-                    sortByAuthor: false,
-                    sortByRatingD: false,
-                    sortByRatingA: true,
-                    sortByTitle: false,
-                })
-            });
-        }else if(sortBy === 'title'){
-            console.log("fetching data for sort by title");
-            fetch('http://localhost:5000/books')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    library: json,
-                    sortByPriceA: false,
-                    sortByPriceD: false,
-                    sortByAuthor: false,
-                    sortByRatingD: false,
-                    sortByRatingA: false,
-                    sortByTitle: true,
-                })
-            });
-        }else if(sortBy === 'author'){
-            console.log("fetching data for sort by author");
-            fetch('http://localhost:5000/book/by-author')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    library: json,
-                    sortByPriceA: false,
-                    sortByPriceD: false,
-                    sortByAuthor: true,
-                    sortByRatingD: false,
-                    sortByRatingA: false,
-                    sortByTitle: false,
-                })
-            });
-        }
+    componentDidUpdate(prevProps) {
+      // Typical usage (don't forget to compare props):
+      if (this.props.sortBy !== prevProps.sortBy) {
+        this.fetchLibrary(this.props.sortBy);
+      }
     }
 
     render() {
         let last = '';
         return (
             <div>
-                <div className="col">
-                <div className="row justify-content-end">
-
-                    <div className="btn-group dropleft">
-                        {/* This is for the sorting functionality */}
-                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort By</button>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('priceD') }}>Price (descending)</a>
-                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('priceA') }}>Price (ascending)</a>
-                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('ratingD') }}>Rating (descending)</a>
-                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('ratingA') }}>Rating (ascending) </a>
-                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('author') }}>Author </a>
-                              <a className="dropdown-item" onClick={() => { this.fetchLibrary('title') }}>Title </a>
-                        </div>
-
-                    </div>
-                </div>
-                </div>
+            <div className="row">
                 {/* This part is to show the list of books */}
                 {this.state.library.map(book => (
-                    <div className="container text-center" key={book.isbn}>
-                        {(this.state.sortByAuthor && (last !== book.author)) ? <h1> {book.author} </h1> : ''}
-                        {/* To stop the author name from showing twice, it would be a good idea to create a function to change the variable instead of doing it here */}
-                        {last = this.state.sortByAuthor ? book.author : ''}
-                        <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} callbackFromParent={this.myCallback}/>
-                    </div>
+                        <div className="col-md-4 d-flex justify-content-between" style={{padding: "5px"}} key={book.isbn}>
+                            <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} callbackFromParent={this.myCallback}/>
+                        </div>
                 ))}
+            </div>
             </div>
         );
     }
