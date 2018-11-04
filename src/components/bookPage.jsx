@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Comment from './comment'
 import AddComment from "./addComment"
-import PropTypes from 'prop-types';
 import ShowMore from 'react-show-more';
 
 class BookPage extends Component {
@@ -20,7 +19,6 @@ class BookPage extends Component {
         this.minimize = this.minimize.bind(this);
         this.addItemToShoppingCart = this.addItemToShoppingCart.bind(this);
     }
-
     componentDidMount(){
         const url = 'http://localhost:5000/book/' + this.state.isbn
         fetch(url)
@@ -33,7 +31,6 @@ class BookPage extends Component {
             })
         });
     }
-
     enlarge(event){
 
         this.setState({
@@ -55,9 +52,8 @@ class BookPage extends Component {
           document.removeEventListener('click', this.minimize);
         });
     }
-
     addItemToShoppingCart(){
-        this.props.callbackFromParent(this.state.isbn)
+        console.log("sending the cart item to the api");
         fetch((this.state.url), {
           method: 'POST',
           headers: {
@@ -69,10 +65,7 @@ class BookPage extends Component {
 
           })
         })
-
-
     }
-
     render() {
 
         let styles = {
@@ -95,9 +88,6 @@ class BookPage extends Component {
                         <img onClick={() => {this.enlarge()}} src={"http://localhost:5000" + this.state.book.img} alt={this.state.book.img} width={this.state.width} height={this.state.height} className="float-left"/>
                     </div>
                     <div className="col-8" style={styles.t}>
-                        <form action={this.addItemToShoppingCart}>
-                            <span class="float-right"><input type="submit" value="Add to cart" /></span>
-                        </form>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Author: </span>
                             <a href={"http://localhost:3000/author/" + this.state.author_id}>{this.state.book.author}</a>
@@ -106,6 +96,9 @@ class BookPage extends Component {
                             <span style={{fontSize: 20}}>Price: </span>
                             <span>{this.state.book.price}</span>
                         </div>
+                        <form onSubmit={()=>{this.addItemToShoppingCart()}}>
+                            <span class="float-right"><input type="submit" value="Add to cart" /></span>
+                        </form>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Average Rating: </span>
                             <span>{this.state.book.rating}</span>
@@ -115,20 +108,23 @@ class BookPage extends Component {
                             <span>{this.state.book.genre}</span>
                         </div>
                         <div className="container" style={styles.s}>
-                            <div style={{fontSize: 20}}>About the author:</div>
                             <ShowMore
                                 lines={2}
                                 more='Show more'
                                 less='Show less'
                                 anchorClass=''>
+                                <span>About the Author: </span>
                                 <span>{this.state.book.author_info}</span>
                             </ShowMore>
-                            <span style={{fontSize: 20}}>Description: </span>
+                        </div>
+                        <div className="container" style={styles.s}>
                             <ShowMore
                                 lines={2}
                                 more='Show more'
                                 less='Show less'
-                                anchorClass=''>{this.state.book.description}
+                                anchorClass=''>
+                                <span>Description: </span>
+                                <span>{this.state.book.description}</span>
                             </ShowMore>
                         </div>
                     </div>

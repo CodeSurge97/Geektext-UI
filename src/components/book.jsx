@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+//import ShowMore from 'react-show-more';
+import { Link } from 'react-router-dom';
 import ShowMore from 'react-show-more';
 
 class Book extends Component {
@@ -15,13 +17,18 @@ class Book extends Component {
             url: 'http://localhost:5000/add-to-cart/1',
             margin: "20px",
             fontSize: "14px",
-            width: "125",
-            height: "150",
+            width: "150px",
+            height: "200px",
+            bookURL: "book/" + this.props.isbn,
+            BgColor: "#f4f4f4",
         }
         this.addItemToShoppingCart = this.addItemToShoppingCart.bind(this);
+        this.renderRedirect = this.renderRedirect.bind(this);
+        this.handleChildClick = this.handleChildClick.bind(this);
+        this.redirect = this.redirect.bind(this);
     }
     addItemToShoppingCart(){
-        this.props.callbackFromParent(this.state.isbn)
+        console.log("sending the cart item to the api");
         fetch((this.state.url), {
           method: 'POST',
           headers: {
@@ -33,51 +40,86 @@ class Book extends Component {
           })
         })
     }
+    renderRedirect(){
+        this.props.router.push(this.state.url);
+    }
+    handleChildClick(e) {
+        this.addItemToShoppingCart();
+        e.stopPropagation();
+     }
+
+     redirect(){
+         window.location = this.state.bookURL;
+     }
 
     render() {
-        let s = {
+        let styles = {
+            s: {
                 margin: this.state.margin,
                 border: "#ddd solid 1px",
-                background: "#f4f4f4",
-                padding: "5px",
+                background: this.state.BgColor,
+                padding: "10px",
                 fontSize: this.state.fontSize,
-                transition: "all 0.5s",
+                transition: "all 0.3s",
+                },
+
+            i: {
+                padding: "10px",
+                transition: "all 0.3s",
+            }
+
+
                 }
         return (
-                <div className="container-fluid" style={s}
-                onMouseEnter={()=>{this.setState({margin: "12px",fontSize: "15px", width: "150px", height: "175px"})}}
-                onMouseLeave={()=>{this.setState({margin: "20px",fontSize: "14px", width: "125px", height: "150px"})}} >
-                    <article>
-                        <div className="container-fluid">
-                        <span style={{fontSize: "25px", lineHeight: "30px"}}>
-                            {this.state.title}
-                        </span>
+                <div className="container p-2" style={styles.s}
+                onMouseEnter={()=>{this.setState({margin: "12px",fontSize: "15px", width: "180px", height: "250px", BgColor: "rgb(230, 230, 230)"})}}
+                onMouseLeave={()=>{this.setState({margin: "20px",fontSize: "14px", width: "150px", height: "200px", BgColor: "#f4f4f4",})}}
+                onClick={this.redirect}
+                >
+                    <div className="container-fluid">
+                        <div className="d-inline-flex py-4">
+                            <div className="justify-content-center"style={{fontSize: "25px", lineHeight: "30px",}}>
+                                {this.state.title}
+                            </div>
                         </div>
-                        <img src={"http://localhost:5000" + this.state.img} alt={this.state.img} style={s} width={this.state.width} height={this.state.height} className="float-left img-thumbnail"/>
-                        <div>
-                            <span><b>Author: </b></span>
-                            <span>{this.state.author}</span>
+                        <div className="d-flex flex-row">
+                            <div className="d-flex col-md-auto">
+                                <div>
+                                    <img src={"http://localhost:5000" + this.state.img} alt={this.state.img} style={styles.i} width={this.state.width} height={this.state.height} className="img-thumbnail float-left"/>
+                                </div>
+                            </div>
+                            <div className="d-flex flex-column">
+                                <div className="flex-row">
+                                    <span><b>Author: </b></span>
+                                    <span>{this.state.author}</span>
+                                </div>
+                                <div className="flex-row">
+                                    <span><b>Price: </b></span>
+                                    <span>${this.state.price}</span>
+                                </div>
+                                <div className="flex-row">
+                                    <div className="mt-2" onClick={(event)=>{event.stopPropagation()}}>
+                                        <ShowMore
+                                            lines={2}
+                                            more='Show more'
+                                            less='Show less'
+                                            anchorClass=''>
+                                            <span>About the Book: </span>
+                                            <span>{this.state.description}</span>
+                                        </ShowMore>
+                                    </div>
+                                </div>
+                                <div className="d-flex mt-3" style={{zIndex: "1"}}>
+                                    <div className="flex-row">
+                                        <form onSubmit={this.handleChildClick}>
+                                            <span className="float-right"><input type="submit" value="Add to cart" /></span>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <span><b>Price: </b></span>
-                            <span>{this.state.price}</span>
                         </div>
-                        <ShowMore
-                            lines={2}
-                            more='Show more'
-                            less='Show less'
-                            anchorClass=''>
-                            <span>Description:</span>
-                            <span>{this.state.description}</span>
-                        </ShowMore>
-                        <form action={"http://localhost:3000/book/" + this.state.isbn}>
-                            <span class="float-right"><input type="submit" value="More Info" /></span>
-                        </form>
-                        <form action={this.addItemToShoppingCart}>
-                            <span class="float-right"><input type="submit" value="Add to cart" /></span>
-                        </form>
-                    </article>
-                </div>
+                    </div>
         );
     }
 

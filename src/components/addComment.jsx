@@ -64,38 +64,6 @@ class AddComment extends Component {
     render() {
         return (
             <div>
-                {/*
-                <h2>Add new Comment</h2>
-                <form onSubmit={this.onSendComment}>
-                    <div>
-                        <label>
-                            User Id:
-                            <input
-                                type="text"
-                                onChange={this.onIDChange}
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Rating:
-                            <input
-                                type="text"
-                                onChange={this.onRatingChange}
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <div>
-                            <label>
-                                Text:
-                            </label>
-                        <input onChange={this.onTextChange}/>
-                            <input type="submit" value="Submit" />
-                        </div>
-                    </div>
-                </form>
-                */}
                 <h1>Rate and Comment!</h1>
                 <form onSubmit={this.onSendComment}>
                     <p>What is your user ID?</p>

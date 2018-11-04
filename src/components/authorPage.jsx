@@ -28,19 +28,20 @@ class AuthorPage extends Component {
     render() {
         return (
             <div className="container-fluid" cellPadding="10px">
+            <div className="row">
                 <title>Books by {this.state.author.name}</title>
-                <h1>{this.state.author.name}</h1>
+                <h1 className="my-3 col-lg-offset-5">{this.state.author.name}</h1>
                 <div className="jumbotron" style={{backgroundColor: 'white', padding: '10px',}}>
-                    <div className="col-lg-9 col-md-3 col-sm-3 col-xs-12">
+                    <div className="mx-5 float-left">
                         <img src={"http://localhost:5000/static/" + this.state.img} alt={this.state.img} width="200px" height="225px" className="float-left img-thumbnail"/>
                     </div>
-                    <div className="jumbotron" style={{backgroundColor: 'white',}}>
+                    <div className="p-5" style={{backgroundColor: 'white',}}>
                         <span><b>Author Info:</b> </span>
                         <span>{this.state.author.author_info}</span>
                     </div>
                 </div>
                 {/* This part is to show the list of books */}
-                <h2 className="jumbotron" style={{backgroundColor: 'white'}}> Books by {this.state.author.name}: </h2>
+                <h2 className="p-2" style={{backgroundColor: 'white'}}> Books by {this.state.author.name}: </h2>
                 <div className="row">
                 {this.state.books.map(book => (
                     <div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}} key={book.isbn}>
@@ -48,7 +49,7 @@ class AuthorPage extends Component {
                     </div>
                 ))}
                 </div>
-
+            </div>
             </div>
         );
     }
