@@ -21,7 +21,7 @@ class BookPage extends Component {
     }
     componentDidMount(){
         const url = 'http://localhost:5000/book/' + this.state.isbn
-        fetch(url)
+        fetch(url, {credentials: 'include'})
         .then(res => res.json())
         .then(json => {
             this.setState({
@@ -56,6 +56,7 @@ class BookPage extends Component {
         console.log("sending the cart item to the api");
         fetch((this.state.url), {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -90,14 +91,14 @@ class BookPage extends Component {
                     <div className="col-8" style={styles.t}>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Author: </span>
-                            <a href={"http://localhost:3000/author/" + this.state.author_id}>{this.state.book.author}</a>
+                            <a href={"http://geek.localhost.com:3000/author/" + this.state.author_id}>{this.state.book.author}</a>
                         </div>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Price: </span>
                             <span>{this.state.book.price}</span>
                         </div>
                         <form onSubmit={()=>{this.addItemToShoppingCart()}}>
-                            <span class="float-right"><input type="submit" value="Add to cart" /></span>
+                            <span className="float-right"><input type="submit" value="Add to cart" /></span>
                         </form>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Average Rating: </span>

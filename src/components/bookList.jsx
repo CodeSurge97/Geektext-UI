@@ -14,7 +14,7 @@ class BookList extends Component {
 
     }
     componentDidMount(){
-        fetch('http://localhost:5000/books')
+        fetch('http://localhost:5000/books', {credentials: 'include'})
         .then(res => res.json())
         .then(json => {
             this.setState({
@@ -32,13 +32,12 @@ class BookList extends Component {
             url = 'http://localhost:5000/book/by-price-a';
         }else if(sortBy === 'ratingD'){
             url = 'http://localhost:5000/book/by-rating-d';
-
         }else if(sortBy === 'ratingA'){
             url = 'http://localhost:5000/book/by-rating-a';
         }else if(sortBy === 'author'){
             url = 'http://localhost:5000/book/by-author';
         }
-        fetch(url).then(res => res.json())
+        fetch(url, {credentials: 'include'}).then(res => res.json())
         .then(json => {
             this.setState({
                 library: json,

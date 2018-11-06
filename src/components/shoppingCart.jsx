@@ -24,7 +24,7 @@ class ShoppingCart extends Component {
         return (
             <div className="container">
             {this.state.items.map(item => (
-                    <div key={item.book}> {item.book} </div>
+                    <div key={item.book}> {item.book} {item.count} </div>
             ))}
             </div>
         );

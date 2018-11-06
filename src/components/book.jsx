@@ -17,8 +17,8 @@ class Book extends Component {
             url: 'http://localhost:5000/add-to-cart/1',
             margin: "20px",
             fontSize: "14px",
-            width: "150px",
-            height: "200px",
+            width: "130px",
+            height: "180px",
             bookURL: "book/" + this.props.isbn,
             BgColor: "#f4f4f4",
         }
@@ -31,6 +31,7 @@ class Book extends Component {
         console.log("sending the cart item to the api");
         fetch((this.state.url), {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -38,7 +39,7 @@ class Book extends Component {
           body: JSON.stringify({
             isbn: this.state.isbn,
           })
-        })
+      });
     }
     renderRedirect(){
         this.props.router.push(this.state.url);
@@ -72,8 +73,8 @@ class Book extends Component {
                 }
         return (
                 <div className="container p-2" style={styles.s}
-                onMouseEnter={()=>{this.setState({margin: "12px",fontSize: "15px", width: "180px", height: "250px", BgColor: "rgb(230, 230, 230)"})}}
-                onMouseLeave={()=>{this.setState({margin: "20px",fontSize: "14px", width: "150px", height: "200px", BgColor: "#f4f4f4",})}}
+                onMouseEnter={()=>{this.setState({margin: "12px",fontSize: "15px", width: "140px", height: "230px", BgColor: "rgb(230, 230, 230)"})}}
+                onMouseLeave={()=>{this.setState({margin: "20px",fontSize: "14px", width: "130px", height: "180px", BgColor: "#f4f4f4",})}}
                 onClick={this.redirect}
                 >
                     <div className="container-fluid">
@@ -98,7 +99,7 @@ class Book extends Component {
                                     <span>${this.state.price}</span>
                                 </div>
                                 <div className="flex-row">
-                                    <div className="mt-2" onClick={(event)=>{event.stopPropagation()}}>
+                                    <div className="mt-2" style={{fontSize: "14px"}} onClick={(event)=>{event.stopPropagation()}}>
                                         <ShowMore
                                             lines={2}
                                             more='Show more'

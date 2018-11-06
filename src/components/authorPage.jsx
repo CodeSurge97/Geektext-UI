@@ -14,7 +14,7 @@ class AuthorPage extends Component {
 
     componentDidMount(){
         const url = 'http://localhost:5000/author/' + this.state.author_id;
-        fetch(url)
+        fetch(url, {credentials: 'include'})
         .then(res => res.json())
         .then(json => {
             this.setState({

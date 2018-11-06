@@ -36,6 +36,7 @@ class LoginApp extends Component {
         event.preventDefault();
         fetch((this.state.url), {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ class LoginApp extends Component {
     render() {
         if(this.state.loggedin !== "false"){
             console.log("redirecting")
-            window.location = "http://localhost:3000/books";
+            window.location = "http://geek.localhost.com:3000/books";
         }
         return (
         <div>

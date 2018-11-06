@@ -17,16 +17,16 @@ class Sidebar extends Component {
             <div className="my-3 mt-5 " style={style}>
             <SideNav theme={theme} defaultSelectedPath={"home"}>
                     <Nav id="login">
-                      <div onClick={() => {window.location = "http://localhost:3000/login"}}>Login</div>
+                      <div onClick={() => {window.location = "http://geek.localhost.com:3000/login"}}>Login</div>
                     </Nav>
                     <Nav id="register">
-                      <div onClick={() => {window.location = "http://localhost:3000/register"}}>Register</div>
+                      <div onClick={() => {window.location = "http://geek.localhost.com:3000/register"}}>Register</div>
                     </Nav>
                     <Nav id="renderitems">
-                      <div onClick={() => {window.location = "http://localhost:3000/popular"}}>Popular</div>
+                      <div onClick={() => {window.location = "http://geek.localhost.com:3000/popular"}}>Popular</div>
                     </Nav>
                     <Nav id="renderitems2">
-                      <div onClick={() => {window.location = "http://localhost:3000/profile"}}>Profile</div>
+                      <div onClick={() => {window.location = "http://geek.localhost.com:3000/profile"}}>Profile</div>
                     </Nav>
                   </SideNav>
             </div>
