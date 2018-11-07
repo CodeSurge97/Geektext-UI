@@ -8,9 +8,9 @@ In the file you need to add
 ```
 127.0.0.1 geek.localhost.com
 ```
-Then you need to set the envrionment variable HOST equal to the domain that we specified
-to do this you must go to the ui folder and find the file package.json 
-go to the line containing "start": "react-scripts start", and add HOST=geek.localhost.com
+Then you need to set the envrionment variable HOST equal to the domain that we specified. Go to the ui folder and find the file package.json 
+
+Then go to the line containing "start": "react-scripts start", and add HOST=geek.localhost.com
 ```
 {
   "name": "geektext",
@@ -32,7 +32,8 @@ go to the line containing "start": "react-scripts start", and add HOST=geek.loca
 ```
 
 
-Source: 
+Sources: 
+
 https://github.com/facebook/create-react-app/issues/2954
 https://stackoverflow.com/questions/1134290/cookies-on-localhost-with-explicit-domain
 https://stackoverflow.com/questions/489369/can-i-use-localhost-as-the-domain-when-setting-an-http-cookie/489396
