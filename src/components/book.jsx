@@ -19,7 +19,7 @@ class Book extends Component {
             fontSize: "14px",
             width: "130px",
             height: "180px",
-            bookURL: "book/" + this.props.isbn,
+            bookURL: "http://geek.localhost.com:3000/book/" + this.props.isbn,
             BgColor: "#f4f4f4",
         }
         this.addItemToShoppingCart = this.addItemToShoppingCart.bind(this);

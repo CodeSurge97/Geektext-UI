@@ -14,8 +14,10 @@ class App extends Component {
         super(props);
         this.state = {
             sortBy: 'title',
+            searchParameter: "",
         }
         this.updateSorting = this.updateSorting.bind(this);
+        this.searchBook = this.searchBook.bind(this);
     }
 
     updateSorting(option){
@@ -24,13 +26,18 @@ class App extends Component {
             sortBy: option,
         });
     }
-
+    searchBook(bookTitle){
+        console.log("the data from the navigation bar is: " + bookTitle);
+        this.setState({
+            searchParameter: bookTitle,
+        });
+    }
     render() {
         return (
             <BrowserRouter>
              <div>
                  <div className="sticky-top">
-                    <NavigationBar isbn={this.state.dataFromChild} callbackFromParent={this.updateSorting}/>
+                    <NavigationBar isbn={this.state.dataFromChild} updateSorting={this.updateSorting} search={this.searchBook}/>
                  </div>
                  <div className="container-fluid">
                     <div className="row content">
@@ -40,8 +47,8 @@ class App extends Component {
                          <div className="col-sm-9">
                             <Route path={"/login"} component={LoginApp} />
                             <Route path={"/register"} component={registerApp} />
-                            <Route path={"/books"} render={() => <BookList sortBy={this.state.sortBy}/>} />
-                            <Route path={"/book/:isbn"} render={(routeProps) => <BookPage {...routeProps} callbackFromParent={this.myCallback}/>} />
+                            <Route path={"/books"} render={() => <BookList sortBy={this.state.sortBy} searchTitle={this.state.searchParameter}/>} />
+                            <Route path={"/book/:isbn"} render={(routeProps) => <BookPage {...routeProps}/>} />
                             <Route path={"/author/:id"} component={AuthorPage}/>
                          </div>
                     </div>

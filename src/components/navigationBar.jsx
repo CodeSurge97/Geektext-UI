@@ -8,9 +8,11 @@ class NavigationBar extends Component {
         this.state = {
             isbn: this.props.isbn,
             showCart: false,
+            search_titel: "",
         }
         this.hideShoppingCart = this.hideShoppingCart.bind(this);
         this.showShoppingCart = this.showShoppingCart.bind(this);
+        this.onSearchChange = this.onSearchChange.bind(this);
 
     }
     showShoppingCart(event){
@@ -27,6 +29,10 @@ class NavigationBar extends Component {
         }, () => {
           document.removeEventListener('click', this.hideShoppingCart);
       });
+    }
+    onSearchChange(event){
+        this.setState({search_titel: event.target.value});
+
     }
 
     render() {
@@ -62,23 +68,23 @@ class NavigationBar extends Component {
                             Sort By
                         </a>
                       <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a className="dropdown-item" onClick={() => { this.props.callbackFromParent('priceD')}}>Price (descending)</a>
+                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('priceD')}}>Price (descending)</a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" onClick={() => { this.props.callbackFromParent('priceA') }}>Price (ascending)</a>
+                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('priceA') }}>Price (ascending)</a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" onClick={() => { this.props.callbackFromParent('ratingD') }}>Rating (descending)</a>
+                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('ratingD') }}>Rating (descending)</a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" onClick={() => { this.props.callbackFromParent('ratingA') }}>Rating (ascending) </a>
+                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('ratingA') }}>Rating (ascending) </a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" onClick={() => { this.props.callbackFromParent('author') }}>Author </a>
+                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('author') }}>Author </a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" onClick={() => { this.props.callbackFromParent('title') }}>Title </a>
+                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('title') }}>Title </a>
                       </div>
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={this.onSearchChange}/>
+                    <button className="btn btn-outline-light my-2 my-sm-0" onClick={(event) => {event.preventDefault(); this.props.search(this.state.search_titel)}}type="submit">Search</button>
                 </form>
               </div>
             </nav>

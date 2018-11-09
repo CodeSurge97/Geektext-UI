@@ -33,7 +33,10 @@ class AuthorPage extends Component {
                 <h1 className="my-3 col-lg-offset-5">{this.state.author.name}</h1>
                 <div className="jumbotron" style={{backgroundColor: 'white', padding: '10px',}}>
                     <div className="mx-5 float-left">
+                    {(this.state.img != "") ?
                         <img src={"http://localhost:5000/static/" + this.state.img} alt={this.state.img} width="200px" height="225px" className="float-left img-thumbnail"/>
+                        :
+                        <div/>}
                     </div>
                     <div className="p-5" style={{backgroundColor: 'white',}}>
                         <span><b>Author Info:</b> </span>
