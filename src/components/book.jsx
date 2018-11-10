@@ -79,7 +79,7 @@ class Book extends Component {
                 >
                     <div className="container-fluid">
                         <div className="d-inline-flex py-4">
-                            <div className="justify-content-center"style={{fontSize: "25px", lineHeight: "30px",}}>
+                            <div className="justify-content-center mx-2"style={{fontSize: "25px", lineHeight: "30px",}}>
                                 {this.state.title}
                             </div>
                         </div>

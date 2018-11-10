@@ -82,10 +82,10 @@ class BookPage extends Component {
             }
         }
         return (
-            <div className="jumbotron" style={styles.s}>
+            <div className="jumbotron mt-3" style={styles.s}>
                 <h1>{this.state.book.title}</h1>
                 <div className="row align-items-center container-fluid">
-                    <div>
+                    <div className="col-md-auto align-self-start mt-4">
                         <img onClick={() => {this.enlarge()}} src={"http://localhost:5000" + this.state.book.img} alt={this.state.book.img} width={this.state.width} height={this.state.height} className="float-left"/>
                     </div>
                     <div className="col-8" style={styles.t}>
@@ -95,10 +95,10 @@ class BookPage extends Component {
                         </div>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Price: </span>
-                            <span>{this.state.book.price}</span>
+                            <span>$ {this.state.book.price}</span>
                         </div>
                         <form onSubmit={()=>{this.addItemToShoppingCart()}}>
-                            <span className="float-right"><input type="submit" value="Add to cart" /></span>
+                            <span className="float-right btn btn-outline-light"><input type="submit" value="Add to cart"/></span>
                         </form>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Average Rating: </span>

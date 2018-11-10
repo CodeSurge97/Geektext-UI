@@ -6,17 +6,18 @@ class ShoppingCart extends Component {
         this.state = {
             username: '',
             items: [],
-            url: 'http://localhost:5000/get-cart/1',
+            url: 'http://localhost:5000/get-cart',
         }
     }
     componentDidMount(){
         console.log("mounting the shopping cart");
-        fetch(this.state.url)
+        fetch(this.state.url, {credentials: 'include'})
         .then(res => res.json())
         .then(json => {
             this.setState({
                 items: json,
             })
+            console.log(json)
         });
     }
 

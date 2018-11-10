@@ -14,7 +14,7 @@ import "./Register.css";
             email: '',
             password: '',
             address: '',
-            url: 'http://127.0.0.1:5000/register',
+            url: 'http://localhost:5000/register',
             email_error_text: null,
             password_error_text: null,
             error: "",
@@ -29,7 +29,6 @@ import "./Register.css";
         this._handleKeyPress = this._handleKeyPress.bind(this);
     }
 
-
     _handleKeyPress(e) {
         if (e.key === 'Enter') {
             if (!this.state.disabled) {
@@ -38,7 +37,7 @@ import "./Register.css";
         }
     }
 
-   sendRegisterInfo(event){
+    sendProfileInfo(event){
         console.log("sending register info")
         event.preventDefault();
         fetch((this.state.url), {
@@ -138,11 +137,6 @@ import "./Register.css";
                     <input className="my-3" type="submit" value="Register"/>
                   </form>
                 </div>
-            </div>
-            <div class="border-top pt-3">
-            <small class="text-muted">
-              Already Have An Account? <a class="ml-2" href="login">Sign In</a>
-            </small>
             </div>
         </div>
      );

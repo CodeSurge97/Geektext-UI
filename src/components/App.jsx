@@ -7,6 +7,8 @@ import BookList from './bookList';
 import Sidebar from './sidebar'
 import LoginApp from "./LoginApp";
 import registerApp from "./registerApp";
+import userProfile from "./userProfile";
+import logout from "./logout";
 
 
 class App extends Component {
@@ -50,6 +52,8 @@ class App extends Component {
                             <Route path={"/books"} render={() => <BookList sortBy={this.state.sortBy} searchTitle={this.state.searchParameter}/>} />
                             <Route path={"/book/:isbn"} render={(routeProps) => <BookPage {...routeProps}/>} />
                             <Route path={"/author/:id"} component={AuthorPage}/>
+                            <Route path={"/user/"} component={userProfile}/>
+                            <Route path={"/logout"} component={logout} />
                          </div>
                     </div>
                  </div>

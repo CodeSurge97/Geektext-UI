@@ -26,7 +26,7 @@ class LoginApp extends Component {
     _handleKeyPress(e) {
         if (e.key === 'Enter') {
             if (!this.state.disabled) {
-                this.sendLoginInfo();
+                this.sendLoginInfo(e);
             }
         }
     }

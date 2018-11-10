@@ -37,16 +37,17 @@ class BookList extends Component {
         let url = 'http://localhost:5000/books/' + pageNumber + '/' + this.state.itemsPerPage;
         if(this.props.searchTitle == ""){
             console.log("the search title is ''");
+            this.setState({sortBy: sortBy})
             if(sortBy === 'priceD'){
-                url = 'http://localhost:5000/book/by-price-d';
+                url = 'http://localhost:5000/book/by-price-d/'  + pageNumber + '/' + this.state.itemsPerPage;
             }else if(sortBy === 'priceA'){
-                url = 'http://localhost:5000/book/by-price-a';
+                url = 'http://localhost:5000/book/by-price-a/'  + pageNumber + '/' + this.state.itemsPerPage;
             }else if(sortBy === 'ratingD'){
-                url = 'http://localhost:5000/book/by-rating-d';
+                url = 'http://localhost:5000/book/by-rating-d/'  + pageNumber + '/' + this.state.itemsPerPage;
             }else if(sortBy === 'ratingA'){
-                url = 'http://localhost:5000/book/by-rating-a';
+                url = 'http://localhost:5000/book/by-rating-a/'  + pageNumber + '/' + this.state.itemsPerPage;
             }else if(sortBy === 'author'){
-                url = 'http://localhost:5000/book/by-author';
+                url = 'http://localhost:5000/book/by-author/'  + pageNumber + '/' + this.state.itemsPerPage;
             }
         }else{
             console.log("this is from bookList and the book we are searching for is " + this.props.searchTitle)
@@ -70,28 +71,31 @@ class BookList extends Component {
     handlePageChange(pageNumber){
         console.log(pageNumber);
         this.setState({ activePage: pageNumber});
-        this.fetchLibrary("", pageNumber);
+        this.fetchLibrary(this.state.sortBy, pageNumber);
     }
 
     render() {
+        console.log(this.state.library);
         return (
-            <div>
+            <div className="mt-4">
                 <div className="row">
                     {/* This part is to show the list of books */}
-                    {this.state.library.map(book => (
-                            <div className="col-md-6 d-flex justify-content-between" style={{padding: "5px"}} key={book.isbn}>
+                    {(this.state.library) ? this.state.library.map(book => (
+                            <div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}} key={book.isbn}>
                                 <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} callbackFromParent={this.myCallback}/>
                             </div>
-                    ))}
+                    )) : null}
                 </div>
-                <div>
-                <Pagination
-                  activePage={this.state.activePage}
-                  itemsCountPerPage={this.state.itemsPerPage}
-                  totalItemsCount={this.state.totalCount}
-                  pageRangeDisplayed={5}
-                  onChange={(n) => {this.handlePageChange(n)} }
-                />
+                <div className="container-fluid">
+                    <div className="col-md-3 offset-sm-5 ">
+                        <Pagination
+                          activePage={this.state.activePage}
+                          itemsCountPerPage={this.state.itemsPerPage}
+                          totalItemsCount={this.state.totalCount}
+                          pageRangeDisplayed={5}
+                          onChange={(n) => {this.handlePageChange(n)} }
+                        />
+                    </div>
                 </div>
             </div>
         );

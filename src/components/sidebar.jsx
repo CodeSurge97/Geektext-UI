@@ -14,22 +14,22 @@ class Sidebar extends Component {
           selectionBgColor: "rgb(200, 200, 200)",
         };
         return (
-            <div className="my-3 mt-5 " style={style}>
-            <SideNav theme={theme} defaultSelectedPath={"home"}>
-                    <Nav id="login">
-                      <div onClick={() => {window.location = "http://geek.localhost.com:3000/login"}}>Login</div>
-                    </Nav>
-                    <Nav id="register">
-                      <div onClick={() => {window.location = "http://geek.localhost.com:3000/register"}}>Register</div>
-                    </Nav>
-                    <Nav id="renderitems">
-                      <div onClick={() => {window.location = "http://geek.localhost.com:3000/popular"}}>Popular</div>
-                    </Nav>
-                    <Nav id="renderitems2">
-                      <div onClick={() => {window.location = "http://geek.localhost.com:3000/profile"}}>Profile</div>
-                    </Nav>
-                  </SideNav>
-            </div>
+                <div className="mt-5 rounded border-left border-info" style={style}>
+                    <SideNav theme={theme} defaultSelectedPath={"home"}>
+                        <Nav id="login">
+                          <div className="container" onClick={() => {window.location = "http://geek.localhost.com:3000/login"}}>Login</div>
+                        </Nav>
+                        <Nav id="register">
+                          <div className="container" onClick={() => {window.location = "http://geek.localhost.com:3000/register"}}>Register</div>
+                        </Nav>
+                        <Nav id="renderitems">
+                          <div className="container" onClick={() => {window.location = "http://geek.localhost.com:3000/popular"}}>Popular</div>
+                        </Nav>
+                        <Nav id="renderitems2">
+                          <div className="container" onClick={() => {window.location = "http://geek.localhost.com:3000/user"}}>Profile</div>
+                        </Nav>
+                    </SideNav>
+                </div>
         );
     }
 
