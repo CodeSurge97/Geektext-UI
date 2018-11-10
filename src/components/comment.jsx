@@ -16,12 +16,15 @@ class Comment extends Component {
     }
 
     render() {
+        let styles = {
+            border: 'solid'
+        };
         if (this.state.anon === 1) {
             console.log("Anon option " + this.state.anon);
             console.log(this.state.nickname);
             console.log(this.state.contents);
             return (
-                <div className="container">
+                <div className="container" style={styles}>
                     <div>
                         <span>Anonymous </span>
                         <span>{this.state.date} EST</span>
@@ -45,7 +48,7 @@ class Comment extends Component {
             console.log(this.state.nickname);
             console.log(this.state.contents);
             return (
-                <div className="container">
+                <div className="container" style={styles}>
                     <div>
                         <span>{this.state.username} </span>
                         <span>{this.state.date} EST</span>
@@ -69,7 +72,7 @@ class Comment extends Component {
             console.log(this.state.nickname);
             console.log(this.state.contents);
             return (
-                <div className="container">
+                <div className="container" style={styles}>
                     <div>
                         <span>{this.state.nickname} </span>
                         <span>{this.state.date} EST</span>

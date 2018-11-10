@@ -64,7 +64,8 @@ class LoginApp extends Component {
     render() {
         if(this.state.loggedin !== "false"){
             console.log("redirecting")
-            //Cookies.set("loggedin", "true");
+            Cookies.set("loggedin", "true");
+            Cookies.set("user", this.state.email);
             window.location = "http://geek.localhost.com:3000/books";
         }
         return (
