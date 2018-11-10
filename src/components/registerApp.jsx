@@ -99,6 +99,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
     register(e){
         fetch((this.state.url + this.state.email), {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',

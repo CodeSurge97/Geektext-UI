@@ -3,6 +3,7 @@ import Comment from './comment';
 import AddComment from "./addComment";
 import ShowMore from 'react-show-more';
 import Cookies from 'js-cookie';
+import StarRatingComponent from 'react-star-rating-component';
 
 class BookPage extends Component {
 
@@ -15,7 +16,6 @@ class BookPage extends Component {
             width: 215,
             height: 280,
             url: 'http://localhost:5000/add-to-cart/1',
-            loggedIn: Cookies.get('loggedin')
         }
         this.enlarge = this.enlarge.bind(this);
         this.minimize = this.minimize.bind(this);
@@ -70,7 +70,6 @@ class BookPage extends Component {
         })
     }
     render() {
-
         let styles = {
             s: {
                 padding: '20px',
@@ -83,7 +82,7 @@ class BookPage extends Component {
                 lineHeight: "10px",
             }
         }
-        if (Cookies.get('loggedin') == false) {
+        if (Cookies.get('loggedin') != "true") {
             console.log("Logged in? " + Cookies.get('loggedin'));
             return (
                 <div className="jumbotron" style={styles.s}>
@@ -106,7 +105,12 @@ class BookPage extends Component {
                             </form>
                             <div className="container" style={styles.t}>
                                 <span style={{fontSize: 20}}>Average Rating: </span>
-                                <span>{this.state.book.rating}</span>
+                                <StarRatingComponent
+                                name="rate1"
+                                starCount={5}
+                                value={Math.round(this.state.book.rating)}
+                                />
+                                <span>{this.state.book.rating} ({this.state.book.numRatings} Ratings)</span>
                             </div>
                             <div className="container" style={styles.t}>
                                 <span style={{fontSize: 20}}>Genre: </span>
@@ -140,11 +144,11 @@ class BookPage extends Component {
                         {/*maybe create a comments component and inside of that a comment component like in books*/}
                         {this.state.comments.map(comment => (
                             <div className="container-fluid" style={styles.s} key={comment.id}>
-                                <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} username={comment.username}/>
+                                <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} anon={comment.anon} date={comment.date} username={comment.username} nickname={comment.nickname}/>
                             </div>
                         ))}
                     </div>
-                    <p><strong>You must <a href="http://geek.localhost.com:3000/login">login</a> in order to rate and comment!</strong></p>
+                    <p><strong>You must <a href="http://geek.localhost.com:3000/login">login</a> or <a href="http://geek.localhost.com:3000/register">register</a> and have the book purchased in order to rate and comment!</strong></p>
                 </div>
             );
         }
@@ -172,7 +176,12 @@ class BookPage extends Component {
                             </form>
                             <div className="container" style={styles.t}>
                                 <span style={{fontSize: 20}}>Average Rating: </span>
-                                <span>{this.state.book.rating}</span>
+                                <StarRatingComponent
+                                name="rate1"
+                                starCount={5}
+                                value={Math.round(this.state.book.rating)}
+                                />
+                                <span>{this.state.book.rating} ({this.state.book.numRatings} Ratings)</span>
                             </div>
                             <div className="container" style={styles.t}>
                                 <span style={{fontSize: 20}}>Genre: </span>
@@ -206,7 +215,7 @@ class BookPage extends Component {
                         {/*maybe create a comments component and inside of that a comment component like in books*/}
                         {this.state.comments.map(comment => (
                             <div className="container-fluid" style={styles.s} key={comment.id}>
-                                <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} username={comment.username}/>
+                                <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} anon={comment.anon} username={comment.username} nickname={comment.nickname}/>
                             </div>
                         ))}
                     </div>
@@ -236,7 +245,12 @@ class BookPage extends Component {
                         </form>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Average Rating: </span>
-                            <span>{this.state.book.rating}</span>
+                            <StarRatingComponent
+                                name="rate1"
+                                starCount={5}
+                                value={Math.round(this.state.book.rating)}
+                                />
+                            <span>{this.state.book.rating} ({this.state.book.numRatings} Ratings)</span>
                         </div>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Genre: </span>
@@ -270,7 +284,7 @@ class BookPage extends Component {
                     {/*maybe create a comments component and inside of that a comment component like in books*/}
                     {this.state.comments.map(comment => (
                         <div className="container-fluid" style={styles.s} key={comment.id}>
-                            <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} username={comment.username}/>
+                            <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} anon={comment.anon} username={comment.username} nickname={comment.nickname}/>
                         </div>
                     ))}
                     <div className="jumbotron" style={styles.s}>

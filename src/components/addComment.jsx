@@ -39,6 +39,7 @@ class AddComment extends Component {
     onSendComment(){
         fetch((this.state.url), {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -62,13 +63,16 @@ class AddComment extends Component {
     console.log(nextValue);
     }
     render() {
+        let styles = {
+            margin: '15px'
+        };
         return (
             <div>
                 <h1>Rate and Comment!</h1>
                 <form onSubmit={this.onSendComment}>
                     <p>Choose what name you would like displayed:</p>
                     <label><input type="radio" onClick={this.onAnonChange} name="anon" value="1" defaultChecked="true"/>Anonymous</label>
-                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="2"/>Username</label>
+                    <label style={styles}><input type="radio" onClick={this.onAnonChange} name="anon" value="2"/>Username</label>
                     <label><input type="radio" onClick={this.onAnonChange} name="anon" value="3"/>Nickname</label>
                     <p>How was the book?</p>
                     <StarRatingComponent

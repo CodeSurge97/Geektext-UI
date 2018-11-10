@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import StarRatingComponent from 'react-star-rating-component';
 
 class Comment extends Component {
     constructor(props){
@@ -15,7 +16,10 @@ class Comment extends Component {
     }
 
     render() {
-        if (this.state.anon === 1)
+        if (this.state.anon === 1) {
+            console.log("Anon option " + this.state.anon);
+            console.log(this.state.nickname);
+            console.log(this.state.contents);
             return (
                 <div className="container">
                     <div>
@@ -24,15 +28,22 @@ class Comment extends Component {
 
                     </div>
                     <div>
-                        <span>Rating: </span>
-                        <span>{this.state.rating}</span>
+                        <StarRatingComponent
+                        name="rate1"
+                        starCount={5}
+                        value={this.state.rating}
+                        />
                     </div>
                     <div>
                         <p>{this.state.contents}</p>
                     </div>
                 </div>
             );
-        else if (this.state.anon === 2)
+        }
+        else if (this.state.anon === 2) {
+            console.log("Anon option " + this.state.anon);
+            console.log(this.state.nickname);
+            console.log(this.state.contents);
             return (
                 <div className="container">
                     <div>
@@ -41,15 +52,22 @@ class Comment extends Component {
 
                     </div>
                     <div>
-                        <span>Rating: </span>
-                        <span>{this.state.rating}</span>
+                        <StarRatingComponent
+                        name="rate1"
+                        starCount={5}
+                        value={this.state.rating}
+                        />
                     </div>
                     <div>
                         <p>{this.state.contents}</p>
                     </div>
                 </div>
             );
-        else if (this.state.anon === 3)
+        }
+        else if (this.state.anon === 3) {
+            console.log("Anon option " + this.state.anon);
+            console.log(this.state.nickname);
+            console.log(this.state.contents);
             return (
                 <div className="container">
                     <div>
@@ -58,14 +76,18 @@ class Comment extends Component {
 
                     </div>
                     <div>
-                        <span>Rating: </span>
-                        <span>{this.state.rating}</span>
+                        <StarRatingComponent
+                        name="rate1"
+                        starCount={5}
+                        value={this.state.rating}
+                        />
                     </div>
                     <div>
                         <p>{this.state.contents}</p>
                     </div>
                 </div>
             );
+        }
     }
 
 }
