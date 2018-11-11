@@ -14,7 +14,7 @@ class Book extends Component {
             img: this.props.image,
             isbn: this.props.isbn,
             description: this.props.description,
-            url: 'http://localhost:5000/add-to-cart/1',
+            url: 'http://localhost:5000/add-to-cart',
             margin: "20px",
             fontSize: "14px",
             width: "130px",
