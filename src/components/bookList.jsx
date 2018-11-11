@@ -82,7 +82,7 @@ class BookList extends Component {
                     {/* This part is to show the list of books */}
                     {(this.state.library) ? this.state.library.map(book => (
                             <div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}} key={book.isbn}>
-                                <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} callbackFromParent={this.myCallback}/>
+                                <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} rating={book.rating} callbackFromParent={this.myCallback}/>
                             </div>
                     )) : null}
                 </div>
