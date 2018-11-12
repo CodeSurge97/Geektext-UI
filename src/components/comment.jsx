@@ -14,86 +14,44 @@ class Comment extends Component {
             anon: this.props.anon
         }
     }
-
+    renderAnon() {
+        if (this.state.anon === 1) {
+            return (<span>Anonymous </span>);
+        }
+        else if (this.state.anon === 2) {
+            return (<span>{this.state.username} </span>);
+        }
+        else if (this.state.anon === 3) {
+            return (<span>{this.state.nickname} </span>);
+        }
+    }
     render() {
         let styles = {
             border: 'solid'
         };
-        if (this.state.anon === 1) {
-            console.log("Anon option " + this.state.anon);
-            console.log(this.state.nickname);
-            console.log(this.state.content);
-            console.log(this.state.user_id);
-            return (
-                <div className="container" style={styles}>
-                    <div>
-                        <span>Anonymous </span>
-                        <span>{this.state.date} EST</span>
+        console.log("Anon option " + this.state.anon);
+        console.log(this.state.nickname);
+        console.log(this.state.content);
+        console.log(this.state.user_id);
+        return (
+            <div className="container" style={styles}>
+                <div>
+                    {this.renderAnon()}
+                    <span>{this.state.date} EST</span>
 
-                    </div>
-                    <div>
-                        <StarRatingComponent
-                        name="rate1"
-                        starCount={5}
-                        value={this.state.rating}
-                        />
-                    </div>
-                    <div>
-                        <p>{this.state.content}</p>
-                    </div>
                 </div>
-            );
-        }
-        else if (this.state.anon === 2) {
-            console.log("Anon option " + this.state.anon);
-            console.log(this.state.nickname);
-            console.log(this.state.content);
-            console.log(this.state.user_id);
-            return (
-                <div className="container" style={styles}>
-                    <div>
-                        <span>{this.state.username} </span>
-                        <span>{this.state.date} EST</span>
-
-                    </div>
-                    <div>
-                        <StarRatingComponent
-                        name="rate1"
-                        starCount={5}
-                        value={this.state.rating}
-                        />
-                    </div>
-                    <div>
-                        <p>{this.state.content}</p>
-                    </div>
+                <div>
+                    <StarRatingComponent
+                    name="rate1"
+                    starCount={5}
+                    value={this.state.rating}
+                    />
                 </div>
-            );
-        }
-        else if (this.state.anon === 3) {
-            console.log("Anon option " + this.state.anon);
-            console.log(this.state.nickname);
-            console.log(this.state.content);
-            console.log(this.state.user_id);
-            return (
-                <div className="container" style={styles}>
-                    <div>
-                        <span>{this.state.nickname} </span>
-                        <span>{this.state.date} EST</span>
-
-                    </div>
-                    <div>
-                        <StarRatingComponent
-                        name="rate1"
-                        starCount={5}
-                        value={this.state.rating}
-                        />
-                    </div>
-                    <div>
-                        <p>{this.state.content}</p>
-                    </div>
+                <div>
+                    <p>{this.state.content}</p>
                 </div>
-            );
-        }
+            </div>
+        );
     }
 
 }
