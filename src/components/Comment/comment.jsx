@@ -9,25 +9,63 @@ class Comment extends Component {
             user_id : this.props.user_id,
             date : this.props.date,
             username: this.props.username,
+            nickname: this.props.nickname,
+            anon: this.props.anon
         }
     }
 
     render() {
-        return (
-            <div className="container-fluid">
-                <div>
-                    <span>{this.state.username} </span>
-                    <span>{this.state.date} </span>
+        if (this.state.anon === 1)
+            return (
+                <div className="container">
+                    <div>
+                        <span>Anonymous </span>
+                        <span>{this.state.date} EST</span>
+
+                    </div>
+                    <div>
+                        <span>Rating: </span>
+                        <span>{this.state.rating}</span>
+                    </div>
+                    <div>
+                        <p>{this.state.contents}</p>
+                    </div>
                 </div>
-                <div>
-                    <span>Rating: </span>
-                    <span>{this.state.rating}</span>
+            );
+        else if (this.state.anon === 2)
+            return (
+                <div className="container">
+                    <div>
+                        <span>{this.state.username} </span>
+                        <span>{this.state.date} EST</span>
+
+                    </div>
+                    <div>
+                        <span>Rating: </span>
+                        <span>{this.state.rating}</span>
+                    </div>
+                    <div>
+                        <p>{this.state.contents}</p>
+                    </div>
                 </div>
-                <div>
-                    <p>{this.state.contents}</p>
+            );
+        else if (this.state.anon === 3)
+            return (
+                <div className="container">
+                    <div>
+                        <span>{this.state.nickname} </span>
+                        <span>{this.state.date} EST</span>
+
+                    </div>
+                    <div>
+                        <span>Rating: </span>
+                        <span>{this.state.rating}</span>
+                    </div>
+                    <div>
+                        <p>{this.state.contents}</p>
+                    </div>
                 </div>
-            </div>
-        );
+            );
     }
 
 }
