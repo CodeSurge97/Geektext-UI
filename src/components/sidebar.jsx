@@ -28,6 +28,9 @@ class Sidebar extends Component {
                         <Nav id="renderitems2">
                           <div className="container" onClick={() => {window.location = "http://geek.localhost.com:3000/user"}}>Profile</div>
                         </Nav>
+                        <Nav id="renderitems2">
+                          <div className="container" onClick={() => {window.location = "http://geek.localhost.com:3000/shopping-cart"}}>Shopping Cart</div>
+                        </Nav>
                     </SideNav>
                 </div>
         );

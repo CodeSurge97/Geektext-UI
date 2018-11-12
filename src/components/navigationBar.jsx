@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ShoppingCart from './ShoppingCart/shoppingCart'
 
 class NavigationBar extends Component {
 
@@ -45,21 +44,11 @@ class NavigationBar extends Component {
 
               <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                  <li className="nav-item">
-                    <a className="nav-link">Link</a>
-                  </li>
                     <li className="nav-item">
-                      <a className="nav-link disabled">Disabled</a>
+                        <a className="nav-link">Team 4</a>
                     </li>
-                    <li className="nav-item dropdown">
-                      <a className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Shopping Cart
-                      </a>
-                      <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <ShoppingCart/>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" >Something else here</a>
-                      </div>
+                    <li className="nav-item">
+                        <a className="nav-link" href="http://geek.localhost.com:3000/shopping-cart">Shopping Cart</a>
                     </li>
                 </ul>
                 <ul className="navbar-nav">

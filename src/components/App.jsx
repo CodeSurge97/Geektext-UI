@@ -4,11 +4,12 @@ import AuthorPage from './Author/authorPage';
 import { BrowserRouter, Route } from 'react-router-dom';
 import NavigationBar from './navigationBar'
 import BookList from './Book/bookList';
-import Sidebar from './sidebar'
+import Sidebar from './sidebar';
 import LoginApp from "./Authentication/LoginApp";
 import registerApp from "./Authentication/registerApp";
 import userProfile from "./Authentication/userProfile";
 import logout from "./Authentication/logout";
+import ShoppingCartApp from "./ShoppingCart/ShoppingCartApp";
 
 
 class App extends Component {
@@ -54,6 +55,7 @@ class App extends Component {
                             <Route path={"/author/:id"} component={AuthorPage}/>
                             <Route path={"/user/"} component={userProfile}/>
                             <Route path={"/logout"} component={logout} />
+                            <Route path={"/shopping-cart"} component={ShoppingCartApp}/>
                          </div>
                     </div>
                  </div>

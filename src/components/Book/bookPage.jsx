@@ -84,7 +84,7 @@ class BookPage extends Component {
             }
         }
         let myJSX;
-        if(!Cookies.get('loggedin')){
+        if(Cookies.get('loggedin') === false){
             myJSX = <p><strong>You must <a href="http://geek.localhost.com:3000/login">login</a> in order to rate and comment!</strong></p>
         }
         else if (false){

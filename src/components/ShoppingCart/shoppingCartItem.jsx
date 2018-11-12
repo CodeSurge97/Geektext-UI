@@ -5,18 +5,16 @@ class ShoppingCartItem extends Component {
     constructor(props){
         super(props);
         this.state = {
-            count: 0,
-            isbn: null,
-            title: "",
+            count: this.props.count,
+            title: this.props.title,
         }
-    }
-    componentDidMount(){
-
     }
 
     render() {
         return (
             <div>
+            <span>{this.state.title}</span>
+            <span>{this.state.count}</span>
             </div>
         );
     }
