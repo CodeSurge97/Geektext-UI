@@ -8,14 +8,15 @@ class AddComment extends Component {
         this.state = {
             text: '',
             id: '',
-            url: 'http://localhost:5000/comment/',
+            url: 'http://localhost:5000/comment',
             isbn: this.props.isbn,
-            rating: 1,
+            rating: 3,
             charsRemaining: 1500,
+            anon: 1,
         };
 
         this.onTextChange = this.onTextChange.bind(this);
-        this.onIDChange = this.onIDChange.bind(this);
+        this.onAnonChange = this.onAnonChange.bind(this);
         this.onSendComment = this.onSendComment.bind(this);
         this.onRatingChange = this.onRatingChange.bind(this);
         this.updateCharacters = this.updateCharacters.bind(this);
@@ -26,10 +27,9 @@ class AddComment extends Component {
         this.setState({ text: event.target.value });
         console.log(event.target.value);
     }
-    onIDChange(event) {
-        this.setState({ id: event.target.value });
+    onAnonChange(event) {
+        this.setState({ anon: event.target.value });
         console.log(event.target.value);
-
     }
     onRatingChange(event){
         this.setState({ rating: event.target.value });
@@ -37,7 +37,7 @@ class AddComment extends Component {
 
     }
     onSendComment(){
-        fetch((this.state.url + this.state.id), {
+        fetch((this.state.url), {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -48,7 +48,7 @@ class AddComment extends Component {
             content: this.state.text,
             isbn: this.state.isbn,
             rating: this.state.rating,
-
+            anon: this.state.anon
           })
         })
     }
@@ -59,15 +59,17 @@ class AddComment extends Component {
     }
     onStarClick(nextValue, prevValue, name) {
     this.setState({rating: nextValue});
+    console.log(nextValue);
     }
-
     render() {
         return (
             <div>
                 <h1>Rate and Comment!</h1>
                 <form onSubmit={this.onSendComment}>
-                    <p>What is your user ID?</p>
-                    <input onChange={this.onIDChange} type="text" name="user_id"/>
+                    <p>Choose what name you would like displayed:</p>
+                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="1" defaultChecked="true"/>Anonymous</label>
+                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="2"/>Username</label>
+                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="3"/>Nickname</label>
                     <p>How was the book?</p>
                     <StarRatingComponent
                       name="rate1"
@@ -84,7 +86,6 @@ class AddComment extends Component {
             </div>
         );
     }
-
 }
 
 export default AddComment;
