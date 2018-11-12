@@ -23,9 +23,9 @@ class ShoppingCart extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container-fluid" style={{overflow: "scroll"}}>
             {this.state.items.map(item => (
-                    <div key={item.book}> {item.book} {item.count} </div>
+                    <div key={item.book}className="container m-2"> {item.book} {item.count} </div>
             ))}
             </div>
         );

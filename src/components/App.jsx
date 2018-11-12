@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import BookPage from './bookPage';
-import AuthorPage from './authorPage';
+import BookPage from './Book/bookPage';
+import AuthorPage from './Author/authorPage';
 import { BrowserRouter, Route } from 'react-router-dom';
 import NavigationBar from './navigationBar'
-import BookList from './bookList';
+import BookList from './Book/bookList';
 import Sidebar from './sidebar'
-import LoginApp from "./LoginApp";
-import registerApp from "./registerApp";
-import userProfile from "./userProfile";
-import logout from "./logout";
+import LoginApp from "./Authentication/LoginApp";
+import registerApp from "./Authentication/registerApp";
+import userProfile from "./Authentication/userProfile";
+import logout from "./Authentication/logout";
 
 
 class App extends Component {

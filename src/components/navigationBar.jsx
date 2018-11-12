@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ShoppingCart from './shoppingCart'
+import ShoppingCart from './ShoppingCart/shoppingCart'
 
 class NavigationBar extends Component {
 

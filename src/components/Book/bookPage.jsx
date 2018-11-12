@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Comment from './comment'
-import AddComment from "./addComment"
+import Comment from '../Comment/comment'
+import AddComment from "../Comment/addComment"
 import ShowMore from 'react-show-more';
 
 class BookPage extends Component {

@@ -11,7 +11,7 @@ class ShoppingCartItem extends Component {
         }
     }
     componentDidMount(){
-        
+
     }
 
     render() {

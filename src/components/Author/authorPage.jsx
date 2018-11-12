@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Book from './book'
+import Book from '../Book/book'
 
 class AuthorPage extends Component {
     constructor(props){

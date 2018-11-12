@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //import ShowMore from 'react-show-more';
 import { Link } from 'react-router-dom';
-import LoginApp from './LoginApp'
+import LoginApp from '../Authentication/LoginApp'
 
 
 class UserProfile extends Component {
@@ -20,7 +20,7 @@ class UserProfile extends Component {
             this.setState({
                 user: json,
             })
-        }); 
+        });
     }
 
 
