@@ -1,4 +1,5 @@
 # ui
+
 To use cookies you need to change the domain of the page because browsers don't usually store cookies from a locally hosted server. To trick the browser we need to add two dots to the domain as in ```geek.localhost.com```
 To do this, we must change the file ```etc/hosts``` I used vim to do it.
 ```$ sudo vim //etc/hosts```
