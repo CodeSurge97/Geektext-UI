@@ -42,10 +42,9 @@ class AddComment extends Component {
           credentials: 'include',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            user_id: this.state.id,
             content: this.state.text,
             isbn: this.state.isbn,
             rating: this.state.rating,

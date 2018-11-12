@@ -5,7 +5,7 @@ class Comment extends Component {
     constructor(props){
         super(props);
         this.state = {
-            contents : this.props.contents,
+            content : this.props.content,
             rating : this.props.rating,
             user_id : this.props.user_id,
             date : this.props.date,
@@ -22,7 +22,8 @@ class Comment extends Component {
         if (this.state.anon === 1) {
             console.log("Anon option " + this.state.anon);
             console.log(this.state.nickname);
-            console.log(this.state.contents);
+            console.log(this.state.content);
+            console.log(this.state.user_id);
             return (
                 <div className="container" style={styles}>
                     <div>
@@ -38,7 +39,7 @@ class Comment extends Component {
                         />
                     </div>
                     <div>
-                        <p>{this.state.contents}</p>
+                        <p>{this.state.content}</p>
                     </div>
                 </div>
             );
@@ -46,7 +47,8 @@ class Comment extends Component {
         else if (this.state.anon === 2) {
             console.log("Anon option " + this.state.anon);
             console.log(this.state.nickname);
-            console.log(this.state.contents);
+            console.log(this.state.content);
+            console.log(this.state.user_id);
             return (
                 <div className="container" style={styles}>
                     <div>
@@ -62,7 +64,7 @@ class Comment extends Component {
                         />
                     </div>
                     <div>
-                        <p>{this.state.contents}</p>
+                        <p>{this.state.content}</p>
                     </div>
                 </div>
             );
@@ -70,7 +72,8 @@ class Comment extends Component {
         else if (this.state.anon === 3) {
             console.log("Anon option " + this.state.anon);
             console.log(this.state.nickname);
-            console.log(this.state.contents);
+            console.log(this.state.content);
+            console.log(this.state.user_id);
             return (
                 <div className="container" style={styles}>
                     <div>
@@ -86,7 +89,7 @@ class Comment extends Component {
                         />
                     </div>
                     <div>
-                        <p>{this.state.contents}</p>
+                        <p>{this.state.content}</p>
                     </div>
                 </div>
             );

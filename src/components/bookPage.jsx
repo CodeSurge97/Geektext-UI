@@ -15,7 +15,7 @@ class BookPage extends Component {
             comments: [],
             width: 215,
             height: 280,
-            url: 'http://localhost:5000/add-to-cart/1',
+            url: 'http://localhost:5000/add-to-cart/1'
         }
         this.enlarge = this.enlarge.bind(this);
         this.minimize = this.minimize.bind(this);
@@ -28,6 +28,7 @@ class BookPage extends Component {
         .then(json => {
             this.setState({
                 book: json,
+                hasBook: json.hasBook,
                 comments: json.comments,
                 author_id: json.author_id,
             })
@@ -82,7 +83,7 @@ class BookPage extends Component {
                 lineHeight: "10px",
             }
         }
-        if (Cookies.get('loggedin') != "true") {
+        if (Cookies.get('loggedin') !== "true") {
             console.log("Logged in? " + Cookies.get('loggedin'));
             return (
                 <div className="jumbotron" style={styles.s}>
@@ -144,7 +145,7 @@ class BookPage extends Component {
                         {/*maybe create a comments component and inside of that a comment component like in books*/}
                         {this.state.comments.map(comment => (
                             <div className="container-fluid" style={styles.s} key={comment.id}>
-                                <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} anon={comment.anon} date={comment.date} username={comment.username} nickname={comment.nickname}/>
+                                <Comment content={comment.content} rating={comment.rating} user_id={comment.user_id} anon={comment.anon} date={comment.date} username={comment.username} nickname={comment.nickname}/>
                             </div>
                         ))}
                     </div>
@@ -153,7 +154,7 @@ class BookPage extends Component {
             );
         }
         //Will create condition later
-        else if (false) {
+        else if (this.state.hasBook === "false") {
             console.log("Logged in? " + Cookies.get('loggedin'));
             return (
                 <div className="jumbotron" style={styles.s}>
@@ -215,7 +216,7 @@ class BookPage extends Component {
                         {/*maybe create a comments component and inside of that a comment component like in books*/}
                         {this.state.comments.map(comment => (
                             <div className="container-fluid" style={styles.s} key={comment.id}>
-                                <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} anon={comment.anon} username={comment.username} nickname={comment.nickname}/>
+                                <Comment content={comment.content} rating={comment.rating} user_id={comment.user_id} date={comment.date} anon={comment.anon} username={comment.username} nickname={comment.nickname}/>
                             </div>
                         ))}
                     </div>
@@ -224,6 +225,7 @@ class BookPage extends Component {
             );
         }
         console.log("Logged in? " + Cookies.get('loggedin'));
+        console.log("Has Book?? " + this.state.hasBook);
         return (
             <div className="jumbotron" style={styles.s}>
                 <h1>{this.state.book.title}</h1>
@@ -284,7 +286,7 @@ class BookPage extends Component {
                     {/*maybe create a comments component and inside of that a comment component like in books*/}
                     {this.state.comments.map(comment => (
                         <div className="container-fluid" style={styles.s} key={comment.id}>
-                            <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} anon={comment.anon} username={comment.username} nickname={comment.nickname}/>
+                            <Comment content={comment.content} rating={comment.rating} user_id={comment.user_id} date={comment.date} anon={comment.anon} username={comment.username} nickname={comment.nickname}/>
                         </div>
                     ))}
                     <div className="jumbotron" style={styles.s}>
