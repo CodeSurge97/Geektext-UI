@@ -15,57 +15,22 @@ class Comment extends Component {
     }
 
     render() {
-        if (this.state.anon === 1)
-            return (
-                <div className="container">
-                    <div>
-                        <span>Anonymous </span>
-                        <span>{this.state.date} EST</span>
+        return (
+            <div className="container">
+                <div>
+                    <span>{this.state.nickname} </span>
+                    <span>{this.state.date} EST</span>
 
-                    </div>
-                    <div>
-                        <span>Rating: </span>
-                        <span>{this.state.rating}</span>
-                    </div>
-                    <div>
-                        <p>{this.state.contents}</p>
-                    </div>
                 </div>
-            );
-        else if (this.state.anon === 2)
-            return (
-                <div className="container">
-                    <div>
-                        <span>{this.state.username} </span>
-                        <span>{this.state.date} EST</span>
-
-                    </div>
-                    <div>
-                        <span>Rating: </span>
-                        <span>{this.state.rating}</span>
-                    </div>
-                    <div>
-                        <p>{this.state.contents}</p>
-                    </div>
+                <div>
+                    <span>Rating: </span>
+                    <span>{this.state.rating}</span>
                 </div>
-            );
-        else if (this.state.anon === 3)
-            return (
-                <div className="container">
-                    <div>
-                        <span>{this.state.nickname} </span>
-                        <span>{this.state.date} EST</span>
-
-                    </div>
-                    <div>
-                        <span>Rating: </span>
-                        <span>{this.state.rating}</span>
-                    </div>
-                    <div>
-                        <p>{this.state.contents}</p>
-                    </div>
+                <div>
+                    <p>{this.state.contents}</p>
                 </div>
-            );
+            </div>
+        );
     }
 
 }

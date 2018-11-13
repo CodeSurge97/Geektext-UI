@@ -24,8 +24,8 @@ class BookPage extends Component {
     componentDidMount(){
         const url = 'http://localhost:5000/book/' + this.state.isbn
         fetch(url, {credentials: 'include'})
-        .then(res => res.json())
-        .then(json => {
+        .then((res) => res.json())
+        .then((json) => {
             this.setState({
                 book: json,
                 comments: json.comments,
@@ -82,16 +82,6 @@ class BookPage extends Component {
                 backgroundColor: 'white',
                 lineHeight: "10px",
             }
-        }
-        let myJSX;
-        if(Cookies.get('loggedin') === false){
-            myJSX = <p><strong>You must <a href="http://geek.localhost.com:3000/login">login</a> in order to rate and comment!</strong></p>
-        }
-        else if (false){
-            myJSX = <p><strong>You must purchase the book in order to rate and comment!</strong></p>;
-        }
-        else{
-            myJSX = <div className="jumbotron" style={styles.s}> <AddComment isbn={this.state.isbn}/> </div>
         }
         console.log("Logged in? " + Cookies.get('loggedin'));
         return (
@@ -152,7 +142,6 @@ class BookPage extends Component {
                             <Comment contents={comment.contents} rating={comment.rating} user_id={comment.user_id} date={comment.date} username={comment.username}/>
                         </div>
                     ))}
-                    {myJSX}
                 </div>
             </div>
         );
