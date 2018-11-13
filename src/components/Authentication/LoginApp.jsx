@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import Cookies from 'js-cookie';
 //import { bindActionCreators } from 'redux';
 
 class LoginApp extends Component {
@@ -26,7 +27,7 @@ class LoginApp extends Component {
     _handleKeyPress(e) {
         if (e.key === 'Enter') {
             if (!this.state.disabled) {
-                this.sendLoginInfo(e);
+                this.sendLoginInfo();
             }
         }
     }
@@ -63,6 +64,8 @@ class LoginApp extends Component {
     render() {
         if(this.state.loggedin !== "false"){
             console.log("redirecting")
+            Cookies.set("loggedin", "true");
+            Cookies.set("user", this.state.email);
             window.location = "http://geek.localhost.com:3000/books";
         }
         return (
