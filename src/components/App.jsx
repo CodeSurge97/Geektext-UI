@@ -7,8 +7,9 @@ import BookList from './bookList';
 import Sidebar from './sidebar'
 import LoginApp from "./LoginApp";
 import registerApp from "./registerApp";
-//import billing from "./billing";
+import billing from "./billing";
 import userProfile from "./userProfile";
+import editProfile from "./editProfile";
 import logout from "./logout";
 
 
@@ -47,7 +48,9 @@ class App extends Component {
                             <Route path={"/book/:isbn"} render={(routeProps) => <BookPage {...routeProps} callbackFromParent={this.myCallback}/>} />
                             <Route path={"/author/:id"} component={AuthorPage}/>
                             <Route path={"/user/:username"} component={userProfile}/>
+                            <Route path={"/editprofile"} component={editProfile}/>
                             <Route path={"/logout"} component={logout} />
+                            <Route path={"/billing"} component={billing}/>
                          </div>
                     </div>
                  </div>

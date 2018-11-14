@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-//import ShowMore from 'react-show-more';
-import { Link } from 'react-router-dom';
-import LoginApp from './LoginApp'
+import Cookies from 'js-cookie';
 
 
 class UserProfile extends Component {
@@ -19,6 +17,7 @@ class UserProfile extends Component {
         .then(res => res.json())
         .then(json => {
             this.setState({
+                username: json.username,
                 user: json,
             })
         });
@@ -54,8 +53,13 @@ class UserProfile extends Component {
                             <span style={{fontSize: 20}}>{this.state.user.address} </span>
                         </div>
                         <div className="container" style={styles.s}>
+                            <span style={{fontSize: 15}}>
+                            <a href={"/billing/"}>Add Card</a>
+                            </span>
+                        </div>
+                        <div className="container" style={styles.s}>
                             <span style={{fontSize: 20}}>
-                            <a href={"http://dev.geektext.com:3000/editprofile/"}>Edit Profile </a>
+                            <a href={"/editprofile/"}>Edit Profile </a>
                             </span>
                         </div>
                 </div>

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import {Link} from 'react-router-dom'
-import "./Register.css";
-//import { bindActionCreators } from 'redux';
-
+import Cookies from 'js-cookie';
+ 
  class billing extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +12,8 @@ import "./Register.css";
             card_number: '',
             cvv: '',
             exp_date: '',
-            url: 'http://127.0.0.1:5000/billing',
+            username: Cookies.get('user'),
+            url: 'http://localhost:5000/billing',
             error: "",
             validated: "false",
         };
@@ -48,6 +48,7 @@ import "./Register.css";
             card_number: this.state.card_number,
             cvv: this.state.cvv,
             exp_date: this.state.exp_date,
+            username: this.state.username,
           })
       }).then((res) => {return res.json(); })
       .then((data) => {this.setState({error: data.error, validated: data.validated})});
@@ -76,7 +77,7 @@ import "./Register.css";
     render() {
      if(this.state.validated !== "false"){
             console.log("redirecting")
-            window.location = "http://linux-2y12:3000/books";
+            window.location = "http://dev.geektext.com:3000/books";
         }
         return (
         <div>
@@ -89,16 +90,16 @@ import "./Register.css";
                         autoFocus
                         type="card_type"
                         value={this.state.card_type}
-                
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a className="dropdown-item" onClick={() => { this.onCardTypeChange}}>Visa</a>
-                          <div className="dropdown-divider"></div>
-                          <a className="dropdown-item" onClick={() => { this.onCardTypeChange }}>MasterCard</a>
-                          <div className="dropdown-divider"></div>
-                          <a className="dropdown-item" onClick={() => { this.onCardTypeChange}}>Discover</a>
-                          <div className="dropdown-divider"></div>
-                          <a className="dropdown-item" onClick={() => { this.onCardTypeChange }}>American Express </a>
-                        </div>
+                        onChange={this.onCardTypeChange}
+                        //<div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                          //<a className="dropdown-item" onClick={() => { this.onCardTypeChange}}>Visa</a>
+                          //<div className="dropdown-divider"></div>
+                          //<a className="dropdown-item" onClick={() => { this.onCardTypeChange }}>MasterCard</a>
+                          //<div className="dropdown-divider"></div>
+                          //<a className="dropdown-item" onClick={() => { this.onCardTypeChange}}>Discover</a>
+                          //<div className="dropdown-divider"></div>
+                          //<a className="dropdown-item" onClick={() => { this.onCardTypeChange }}>American Express </a>
+                        //</div>
                      
                       />
                     </FormGroup>
