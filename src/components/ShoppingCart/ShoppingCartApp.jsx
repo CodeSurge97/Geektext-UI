@@ -9,6 +9,7 @@ class ShoppingCartApp extends Component {
             user: '',
             items: [],
             url: "http://localhost:5000/get-cart",
+            img: this.props.img
         }
         this.fetch_cart = this.fetch_cart.bind(this);
     }
@@ -20,6 +21,7 @@ class ShoppingCartApp extends Component {
             this.setState({
                 user: json.user_name,
                 items: json.items,
+                img: json.img
             })
         });
     }
@@ -33,7 +35,8 @@ class ShoppingCartApp extends Component {
             <h1>Shopping Cart for the user: {this.state.user}</h1>
             {this.state.items.map((item) =>
                 (<div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}}>
-                    <ShoppingCartItem count={item.count} title={item.book}/>
+                    
+                    <ShoppingCartItem img={item.img} count={item.count} title={item.book}/>
                 </div>)
             )}
             </div>
