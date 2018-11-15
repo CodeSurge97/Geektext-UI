@@ -36,13 +36,14 @@ class AddComment extends Component {
         console.log(event.target.value);
 
     }
-    onSendComment(){
+    onSendComment(event){
+        event.preventDefault();
         fetch((this.state.url), {
           method: 'POST',
           credentials: 'include',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             content: this.state.text,
@@ -51,6 +52,8 @@ class AddComment extends Component {
             anon: this.state.anon
           })
         })
+        console.log("Contents: " + this.state.text)
+        window.setTimeout(()=> (window.location = "http://geek.localhost.com:3000/book/" + this.state.isbn), 500);
     }
     updateCharacters(length) {
         this.setState({
@@ -70,9 +73,9 @@ class AddComment extends Component {
                 <h1>Rate and Comment!</h1>
                 <form onSubmit={this.onSendComment}>
                     <p>Choose what name you would like displayed:</p>
-                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="1" defaultChecked="true"/>Anonymous</label>
-                    <label style={styles}><input type="radio" onClick={this.onAnonChange} name="anon" value="2"/>Username</label>
-                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="3"/>Nickname</label>
+                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="1" defaultChecked="true"/> Anonymous</label>
+                    <label style={styles}><input type="radio" onClick={this.onAnonChange} name="anon" value="2"/> Username</label>
+                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="3"/> Nickname</label>
                     <p>How was the book?</p>
                     <StarRatingComponent
                       name="rate1"
