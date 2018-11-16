@@ -29,6 +29,9 @@ class Comment extends Component {
         let styles = {
             border: 'solid'
         };
+        let starStyle = {
+
+        }
         console.log("Anon option " + this.state.anon);
         console.log(this.state.nickname);
         console.log(this.state.content);

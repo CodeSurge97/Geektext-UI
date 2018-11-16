@@ -53,7 +53,7 @@ class AddComment extends Component {
           })
         })
         console.log("Contents: " + this.state.text)
-        window.setTimeout(()=> (window.location = "http://geek.localhost.com:3000/book/" + this.state.isbn), 500);
+        window.setTimeout(()=> (window.location = "http://geek.localhost.com:3000/book/" + this.state.isbn), 750);
     }
     updateCharacters(length) {
         this.setState({

@@ -70,6 +70,11 @@ class BookPage extends Component {
           })
         })
     }
+    ratingSingularOrPlural(rating) {
+        if (rating === 1)
+            return "rating";
+        return "ratings";
+    }
     renderAddComment(styles) {
         if (Cookies.get('loggedin') !== "true") {
             return (
@@ -132,7 +137,7 @@ class BookPage extends Component {
                                 starCount={5}
                                 value={Math.round(this.state.book.rating)}
                                 />
-                            <span>{this.state.book.rating} ({this.state.book.numRatings} Ratings)</span>
+                            <span>{this.state.book.rating} ({this.state.book.numRatings} {this.ratingSingularOrPlural(this.state.book.numRatings)})</span>
                         </div>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Genre: </span>
