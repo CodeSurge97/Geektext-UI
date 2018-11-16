@@ -14,7 +14,7 @@ class Sidebar extends Component {
           selectionBgColor: "rgb(200, 200, 200)",
         };
         return (
-                <div className="mt-5 rounded border-left border-dark" style={style}>
+                <div className="mt-5 rounded " style={style}>
                     <SideNav theme={theme} defaultSelectedPath={"home"}>
                         <Nav id="login">
                           <div className="container" onClick={() => {window.location = "http://geek.localhost.com:3000/login"}}>Login</div>
