@@ -71,7 +71,7 @@ class AddComment extends Component {
         };
         return (
             <div>
-                <h1>Rate and Comment!</h1>
+                <h2>Rate and Comment!</h2>
                 <form onSubmit={this.onSendComment}>
                     <p>Choose what name you would like displayed:</p>
                     <label><input type="radio" onClick={this.onAnonChange} name="anon" value="1" defaultChecked="true"/> Anonymous</label>

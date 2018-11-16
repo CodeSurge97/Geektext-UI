@@ -93,8 +93,12 @@ class BookPage extends Component {
         );
     }
     ratingSingularOrPlural(rating) {
-        if (rating === 1)
+        if (rating === 1){
             return "rating";
+        }
+        if (!rating){
+            return "0 ratings";
+        }
         return "ratings";
     }
     render() {
