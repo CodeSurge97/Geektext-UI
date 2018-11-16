@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StarRatingComponent from 'react-star-rating-component';
+import ReactStars from 'react-stars';
 
 class Comment extends Component {
     constructor(props){
@@ -41,11 +41,13 @@ class Comment extends Component {
 
                 </div>
                 <div>
-                    <StarRatingComponent
-                    name="rate1"
-                    starCount={5}
-                    value={this.state.rating}
-                    />
+                    <ReactStars
+                        count={5}
+                        value={this.state.rating}
+                        size={20}
+                        edit={false}
+                        half={true}
+                        />
                 </div>
                 <div>
                     <p>{this.state.content}</p>

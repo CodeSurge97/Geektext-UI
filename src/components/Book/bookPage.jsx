@@ -3,7 +3,7 @@ import Comment from '../Comment/comment'
 import AddComment from "../Comment/addComment"
 import ShowMore from 'react-show-more';
 import Cookies from 'js-cookie';
-import StarRatingComponent from 'react-star-rating-component';
+import ReactStars from 'react-stars';
 
 class BookPage extends Component {
 
@@ -121,42 +121,53 @@ class BookPage extends Component {
                         </div>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Price: </span>
-                            <span>$ {this.state.book.price}</span>
+                            <span>${this.state.book.price}</span>
                         </div>
                         <form onSubmit={()=>{this.addItemToShoppingCart()}}>
                             <span className="float-right btn btn-outline-light"><input type="submit" value="Add to cart"/></span>
                         </form>
                         <div className="container" style={styles.t}>
-                            <span style={{fontSize: 20}}>Average Rating: </span>
-                            <StarRatingComponent
-                                name="rate1"
-                                starCount={5}
-                                value={Math.round(this.state.book.rating)}
-                                />
-                            <span>{this.state.book.rating} ({this.state.book.numRatings} Ratings)</span>
-                        </div>
-                        <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Genre: </span>
                             <span>{this.state.book.genre}</span>
                         </div>
+                        <div className="container" style={{padding: '10px', backgroundColor: 'white', lineHeight: "30px",}}>
+                            <div style={{fontSize: 20}} className="d-inline-block align-middle">Rating:</div>
+                            <ReactStars
+                                className="d-inline-block align-middle"
+                                count={5}
+                                value={this.state.book.rating}
+                                size={23}
+                                half={true}
+                                edit={false}
+                                />
+                            <span style={{fontSize: 13}}>(number of ratings: {this.state.book.numRatings})</span>
+                        </div>
+                        <div className="container" style={styles.t}>
+                            <span style={{fontSize: 15}}>Publication Date: </span>
+                            <span style={{fontSize: 15}}>{this.state.book.date_pub}</span>
+                        </div>
+                        <div className="container" style={styles.t}>
+                            <span style={{fontSize: 15}}>Publisher: </span>
+                            <span style={{fontSize: 15}}>{this.state.book.publisher}</span>
+                        </div>
                         <div className="container" style={styles.s}>
+                            <span style={{fontSize: 17}}>Book Description: </span>
                             <ShowMore
                                 lines={2}
                                 more='Show more'
                                 less='Show less'
                                 anchorClass=''>
-                                <span>About the Author: </span>
-                                <span>{this.state.book.author_info}</span>
+                                <span>{this.state.book.description}</span>
                             </ShowMore>
                         </div>
                         <div className="container" style={styles.s}>
+                            <span style={{fontSize: 17}} >About the Author: </span>
                             <ShowMore
                                 lines={2}
                                 more='Show more'
                                 less='Show less'
                                 anchorClass=''>
-                                <span>Description: </span>
-                                <span>{this.state.book.description}</span>
+                                <span>{this.state.book.author_info}</span>
                             </ShowMore>
                         </div>
                     </div>

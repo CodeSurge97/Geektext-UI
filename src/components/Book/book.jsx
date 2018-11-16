@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //import ShowMore from 'react-show-more';
 import { Link } from 'react-router-dom';
 import ShowMore from 'react-show-more';
+import ReactStars from 'react-stars';
 
 class Book extends Component {
 
@@ -14,6 +15,7 @@ class Book extends Component {
             img: this.props.image,
             isbn: this.props.isbn,
             description: this.props.description,
+            rating: this.props.rating,
             url: 'http://localhost:5000/add-to-cart',
             margin: "20px",
             fontSize: "14px",
@@ -97,6 +99,17 @@ class Book extends Component {
                                 <div className="flex-row">
                                     <span><b>Price: </b></span>
                                     <span>${this.state.price}</span>
+                                </div>
+                                <div className="flex-row">
+                                    <div className="d-inline-block align-middle"><b>Rating:  </b></div>
+                                    <ReactStars
+                                        className="d-inline-block align-middle"
+                                        count={5}
+                                        value={this.state.rating}
+                                        size={20}
+                                        edit={false}
+                                        half={true}
+                                        />
                                 </div>
                                 <div className="flex-row">
                                     <div className="mt-2" style={{fontSize: "14px"}} onClick={(event)=>{event.stopPropagation()}}>

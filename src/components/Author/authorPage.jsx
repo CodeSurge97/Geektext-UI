@@ -22,6 +22,7 @@ class AuthorPage extends Component {
                 books: json.books,
                 img: json.author_pic
             })
+            console.log(json.author_pic); 
         });
     }
 
@@ -48,7 +49,7 @@ class AuthorPage extends Component {
                 <div className="row">
                 {this.state.books.map(book => (
                     <div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}} key={book.isbn}>
-                        <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} callbackFromParent={this.myCallback}/>
+                        <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} rating={book.rating} description={book.description} callbackFromParent={this.myCallback}/>
                     </div>
                 ))}
                 </div>
