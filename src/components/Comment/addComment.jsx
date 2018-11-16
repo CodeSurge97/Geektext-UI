@@ -54,7 +54,7 @@ class AddComment extends Component {
           })
         })
         console.log("Contents: " + this.state.text)
-        window.setTimeout(()=> (window.location = "http://geek.localhost.com:3000/book/" + this.state.isbn), 500);
+        window.setTimeout(()=> (window.location = "http://geek.localhost.com:3000/book/" + this.state.isbn), 1000);
     }
     updateCharacters(length) {
         this.setState({
@@ -83,8 +83,8 @@ class AddComment extends Component {
                         value={this.state.rating}
                         size={25}
                         edit={true}
-                        half={true}
                         onChange={this.onStarClick}
+                        half={false}
                         />
                     <p>Tell us more about what you thought! (Character Limit: 1500)</p>
                     <textarea onChange={this.onTextChange} rows="4" cols="50" id="comment" name="comment" placeholder="Comment here!" maxLength="1500"></textarea><br/>

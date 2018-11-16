@@ -46,7 +46,6 @@ class Comment extends Component {
                         value={this.state.rating}
                         size={20}
                         edit={false}
-                        half={true}
                         />
                 </div>
                 <div>
