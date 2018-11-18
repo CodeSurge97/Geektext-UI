@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SideNav, Nav } from 'react-sidenav'
+import { SideNav, Nav } from 'react-sidenav';
 import Cookies from 'js-cookie';
 
 class Sidebar extends Component {
