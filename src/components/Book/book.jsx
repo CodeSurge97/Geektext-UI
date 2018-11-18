@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 //import ShowMore from 'react-show-more';
-import { Link } from 'react-router-dom';
 import ShowMore from 'react-show-more';
 import ReactStars from 'react-stars';
 
