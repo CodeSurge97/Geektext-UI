@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import {Link} from 'react-router-dom'
-import "./Register.css";
-//import { bindActionCreators } from 'redux';
+import Cookies from 'js-cookie';
 
- class registerApp extends Component {
+ class editProfile extends Component {
     constructor(props) {
         super(props);
-        //const redirectRoute = '/login';
         this.state = {
             name: '',
-            username: '',
+            old_username: Cookies.get('user'),
+            new_username: '', 
             email: '',
             password: '',
             address: '',
-            url: 'http://localhost:5000/register',
+            url: 'http://localhost:5000/Edit_Profile',
             email_error_text: null,
             password_error_text: null,
             error: "",
-            registered: "false",
-        };
-        this.sendRegisterInfo = this.sendRegisterInfo.bind(this);
+            updated: "false",
+        }
+        this.sendProfileInfo = this.sendProfileInfo.bind(this);
         this.onNameChange = this.onNameChange.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);
         this.onEmailChange = this.onEmailChange.bind(this);
@@ -32,7 +30,7 @@ import "./Register.css";
     _handleKeyPress(e) {
         if (e.key === 'Enter') {
             if (!this.state.disabled) {
-                this.sendRegisterInfo(e);
+                this.sendProfileInfo(e);
             }
         }
     }
@@ -49,13 +47,14 @@ import "./Register.css";
           },
           body: JSON.stringify({
             name: this.state.name,
-            username: this.state.username,
+            old_username: this.state.old_username,
+            new_username : this.state.new_username,
             email: this.state.email,
             password: this.state.password,
             address: this.state.address,
           })
       }).then((res) => {return res.json(); })
-      .then((data) => {this.setState({error: data.error, registered: data.registered})});
+      .then((data) => {this.setState({error: data.error, updated: data.updated})});
     }
 
     onNameChange(event) {
@@ -64,7 +63,7 @@ import "./Register.css";
     }
 
     onUsernameChange(event) {
-      this.setState({ username: event.target.value });
+      this.setState({ new_username: event.target.value });
       console.log(event.target.value);
     }
 
@@ -84,15 +83,15 @@ import "./Register.css";
     }
 
     render() {
-     if(this.state.registered !== "false"){
+     if(this.state.updated !== "false"){
             console.log("redirecting")
-            window.location = "http://geek.localhost.com:3000/books";
+            window.location = "http://geek.localhost.com:3000/user/" + this.state.new_username;
         }
         return (
         <div>
             <div className="container-fluid p-5">
                 <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this._handleKeyPress(e)}>
-                  <form onSubmit={this.sendRegisterInfo}>
+                  <form onSubmit={this.sendProfileInfo}>
                     <FormGroup controlId="name" bsSize="large">
                       <ControlLabel>Name</ControlLabel>
                       <FormControl
@@ -106,7 +105,7 @@ import "./Register.css";
                       <ControlLabel>Username</ControlLabel>
                       <FormControl
                         type="username"
-                        value={this.state.username}
+                        value={this.state.new_username}
                         onChange={this.onUsernameChange}
                       />
                     </FormGroup>
@@ -143,4 +142,4 @@ import "./Register.css";
   }
 }
 
-export default registerApp;
+export default editProfile;

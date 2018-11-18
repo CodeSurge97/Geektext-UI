@@ -8,9 +8,11 @@ import Sidebar from './sidebar';
 import LoginApp from "./Authentication/LoginApp";
 import registerApp from "./Authentication/registerApp";
 import userProfile from "./Authentication/userProfile";
+import editProfile from "./Authentication/editProfile";
+import billing from "./Authentication/billing";
 import logout from "./Authentication/logout";
 import ShoppingCartApp from "./ShoppingCart/ShoppingCartApp";
-
+//There might be an error in this file if the api is not updated since the route for user has a user id in the url. 
 
 class App extends Component {
     constructor(props){
@@ -53,7 +55,9 @@ class App extends Component {
                             <Route path={"/books"} render={() => <BookList sortBy={this.state.sortBy} searchTitle={this.state.searchParameter}/>} />
                             <Route path={"/book/:isbn"} render={(routeProps) => <BookPage {...routeProps}/>} />
                             <Route path={"/author/:id"} component={AuthorPage}/>
-                            <Route path={"/user/"} component={userProfile}/>
+                            <Route path={"/user/:username"} component={userProfile}/>
+                            <Route path={"/editprofile"} component={editProfile}/>
+                            <Route path={"/billing"} component={billing}/>
                             <Route path={"/logout"} component={logout} />
                             <Route path={"/shopping-cart"} component={ShoppingCartApp}/>
                          </div>

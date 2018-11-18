@@ -1,8 +1,9 @@
+
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import {Link} from 'react-router-dom'
 import "./Register.css";
-//import { bindActionCreators } from 'redux';
+import Cookies from 'js-cookie';
+
 
  class registerApp extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ import "./Register.css";
             email: '',
             password: '',
             address: '',
-            url: 'http://127.0.0.1:5000/register',
+            url: 'http://localhost:5000/register',
             email_error_text: null,
             password_error_text: null,
             error: "",
@@ -87,6 +88,8 @@ import "./Register.css";
     render() {
      if(this.state.registered !== "false"){
             console.log("redirecting")
+            Cookies.set('loggedin', 'true');
+            Cookies.set('user', this.state.username);
             window.location = "http://geek.localhost.com:3000/books";
         }
         return (

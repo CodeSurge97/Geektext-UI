@@ -22,7 +22,7 @@ class AuthorPage extends Component {
                 books: json.books,
                 img: json.author_pic
             })
-            console.log(json.author_pic); 
+            console.log(json.author_pic);
         });
     }
 
