@@ -69,10 +69,15 @@ class AddComment extends Component {
         let styles = {
             margin: '15px'
         };
+        let textColor = {
+            color: 'red'
+        };
         return (
             <div>
-                <h2>Rate and Comment!</h2>
+                <h1>Rate and Comment!</h1>
                 <form onSubmit={this.onSendComment}>
+                    <p style={textColor}><strong>You can only rate and comment once, so if you have already submitted a rating
+                    and a comment, that would be overwritten by this one!</strong></p>
                     <p>Choose what name you would like displayed:</p>
                     <label><input type="radio" onClick={this.onAnonChange} name="anon" value="1" defaultChecked="true"/> Anonymous</label>
                     <label style={styles}><input type="radio" onClick={this.onAnonChange} name="anon" value="2"/> Username</label>
