@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import {Link} from 'react-router-dom'
 import Cookies from 'js-cookie';
+
  
  class billing extends Component {
     constructor(props) {
@@ -78,7 +79,7 @@ import Cookies from 'js-cookie';
      if(this.state.validated !== "false"){
             console.log("redirecting")
             window.location = "http://dev.geektext.com:3000/books";
-        }
+            }
         return (
         <div>
             <div className="container-fluid p-5">
@@ -86,27 +87,19 @@ import Cookies from 'js-cookie';
                   <form onSubmit={this.sendBillingInfo}>
                     <FormGroup controlId="card_type" bsSize="large">
                       <ControlLabel>Card Type</ControlLabel>
-                      <FormControl
-                        autoFocus
-                        type="card_type"
-                        value={this.state.card_type}
-                        onChange={this.onCardTypeChange}
-                        //<div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                          //<a className="dropdown-item" onClick={() => { this.onCardTypeChange}}>Visa</a>
-                          //<div className="dropdown-divider"></div>
-                          //<a className="dropdown-item" onClick={() => { this.onCardTypeChange }}>MasterCard</a>
-                          //<div className="dropdown-divider"></div>
-                          //<a className="dropdown-item" onClick={() => { this.onCardTypeChange}}>Discover</a>
-                          //<div className="dropdown-divider"></div>
-                          //<a className="dropdown-item" onClick={() => { this.onCardTypeChange }}>American Express </a>
-                        //</div>
-                     
-                      />
+                      <a>{"    "}</a>
+                        <select value={this.state.card_type} onChange={this.onCardTypeChange}>
+                          <option>Visa</option>
+                          <option>MasterCard</option>
+                          <option>Discover</option>
+                          <option>American Express</option>
+                        </select>
                     </FormGroup>
                     <FormGroup controlId="card_number" bsSize="large">
                       <ControlLabel>Card Number</ControlLabel>
                       <FormControl
-                        type="card_type"
+                        type="card_number"
+                        placeholder= "xxxx-xxxx-xxxx-xxxx" 
                         value={this.state.card_number}
                         onChange={this.onCardNumberChange}
                       />
@@ -123,11 +116,12 @@ import Cookies from 'js-cookie';
                       <ControlLabel>Expiration Date</ControlLabel>
                       <FormControl
                         type="exp_date"
+                        placeholder="MM/YYYY" 
                         value={this.state.exp_date}
                         onChange={this.onExpirationDateChange}
                       />
                     </FormGroup>
-                    <input className="my-3" type="submit" value="Submit"/>
+                    <Button type="button" class="btn btn-primary">Submit</Button>
                   </form>
                 </div>
             </div>

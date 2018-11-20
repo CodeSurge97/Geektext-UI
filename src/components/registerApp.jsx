@@ -137,7 +137,7 @@ import Cookies from 'js-cookie';
                         onChange={this.onAddressChange}
                       />
                     </FormGroup>
-                    <input className="my-3" type="submit" value="Register"/>
+                    <Button type="submit" class="btn btn-primary">Register</Button>
                   </form>
                 </div>
             </div>

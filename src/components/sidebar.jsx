@@ -22,7 +22,7 @@ class Sidebar extends Component {
           selectionBgColor: "rgb(200, 200, 200)",
         };
         
-      if(Cookies.get('loggedin') == "true"){
+      if(Cookies.get('loggedin') === "true"){
         return (
           <div className="my-3 mt-5 " style={style}>
                 <SideNav theme={theme} defaultSelectedPath={"home"}>

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Button } from "react-bootstrap";
+import {Link} from 'react-router-dom'
 import ShoppingCart from './shoppingCart'
+import Cookies from 'js-cookie';
 
 class NavigationBar extends Component {
 
@@ -29,7 +32,20 @@ class NavigationBar extends Component {
       });
     }
 
+    renderLogout() {
+        if (Cookies.get('loggedin') !== "false") {
+            return (
+                <Link to="/logout">
+                  <button class="btn btn-secondary" type="button">
+                     <a>Logout</a>
+                  </button>
+                </Link>
+            );
+        }
+    }
+
     render() {
+
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
               <a className="navbar-brand" href="/books" style={{color: "white", fontSize: "30px"}}>GeekText</a>
@@ -54,6 +70,9 @@ class NavigationBar extends Component {
                         <div className="dropdown-divider"></div>
                         <a className="dropdown-item" >Something else here</a>
                       </div>
+                    </li>
+                    <li className="nav-item">
+                      {this.renderLogout()}
                     </li>
                 </ul>
                 <ul className="navbar-nav">

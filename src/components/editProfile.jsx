@@ -12,6 +12,7 @@ import Cookies from 'js-cookie';
             email: '',
             password: '',
             address: '',
+            user: {},
             url: 'http://localhost:5000/Edit_Profile',
             email_error_text: null,
             password_error_text: null,
@@ -35,7 +36,6 @@ import Cookies from 'js-cookie';
         }
     }
 
-    
     sendProfileInfo(event){
         console.log("sending register info")
         event.preventDefault();
@@ -85,6 +85,7 @@ import Cookies from 'js-cookie';
     render() {
      if(this.state.updated !== "false"){
             console.log("redirecting")
+            Cookies.set('user', this.state.new_username)
             window.location = "http://dev.geektext.com:3000/user/" + this.state.new_username;
         }
         return (
@@ -97,7 +98,7 @@ import Cookies from 'js-cookie';
                       <FormControl
                         autoFocus
                         type="name"
-                        value={this.state.name}
+                        value={this.state.user.name}
                         onChange={this.onNameChange}
                       />
                     </FormGroup>
@@ -133,7 +134,7 @@ import Cookies from 'js-cookie';
                         onChange={this.onAddressChange}
                       />
                     </FormGroup>
-                    <input className="my-3" type="submit" value="Register"/>
+                    <input className="my-3" type="submit" value="Update"/>
                   </form>
                 </div>
             </div>

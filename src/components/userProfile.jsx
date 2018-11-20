@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Cookies from 'js-cookie';
 
 
 class UserProfile extends Component {
@@ -9,8 +8,10 @@ class UserProfile extends Component {
         this.state = {
             username: this.props.match.params.username,
             user: {},
+            credit_cards: [],
         }
     }
+    
     componentDidMount(){
         const url = 'http://localhost:5000/user/' + this.state.username
         fetch(url, {credentials: 'include'})
@@ -19,6 +20,7 @@ class UserProfile extends Component {
             this.setState({
                 username: json.username,
                 user: json,
+                credit_cards: json.credit_cards,
             })
         });
     }
@@ -52,11 +54,17 @@ class UserProfile extends Component {
                         <div className="container" style={styles.s}>
                             <span style={{fontSize: 20}}>{this.state.user.address} </span>
                         </div>
+                        {this.state.credit_cards.map(credit_card => (
+                        <div className="container-fluid" style={styles.s}>
+                             <span style={{fontSize: 20}}>{credit_card.card_number} </span>
+                        </div>
+                    ))}
                         <div className="container" style={styles.s}>
                             <span style={{fontSize: 15}}>
                             <a href={"/billing/"}>Add Card</a>
                             </span>
                         </div>
+
                         <div className="container" style={styles.s}>
                             <span style={{fontSize: 20}}>
                             <a href={"/editprofile/"}>Edit Profile </a>
