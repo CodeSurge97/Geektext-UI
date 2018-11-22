@@ -59,17 +59,6 @@ class LoginApp extends Component {
       console.log(event.target.value);
 
     }
-
-     //componentDidMount(){
-        //const url = 'http://localhost:5000/get-user/' + this.state.email
-       //fetch(url, {credentials: 'include'})
-        //.then(res => res.json())
-       //.then(json => {
-            //this.setState({
-                //username: json.username,
-            //})
-        //});
-    //}
     
     render() {
         if(this.state.loggedin !== "false"){
@@ -78,7 +67,7 @@ class LoginApp extends Component {
             window.location = "http://dev.geektext.com:3000/books";
         }
         
-        if(Cookies.get('loggedin') == "true"){
+        if(Cookies.get('loggedin') === "true"){
             console.log("redirecting")
             Cookies.set('user', this.state.username);
             window.location = "http://dev.geektext.com:3000/books";

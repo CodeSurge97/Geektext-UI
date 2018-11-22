@@ -87,7 +87,7 @@ import Cookies from 'js-cookie';
                   <form onSubmit={this.sendBillingInfo}>
                     <FormGroup controlId="card_type" bsSize="large">
                       <ControlLabel>Card Type</ControlLabel>
-                      <a>{"    "}</a>
+                        <a>{"   "}</a> 
                         <select value={this.state.card_type} onChange={this.onCardTypeChange}>
                           <option>Visa</option>
                           <option>MasterCard</option>
@@ -121,7 +121,7 @@ import Cookies from 'js-cookie';
                         onChange={this.onExpirationDateChange}
                       />
                     </FormGroup>
-                    <Button type="button" class="btn btn-primary">Submit</Button>
+                    <Button type="submit" class="btn btn-primary">Submit</Button>
                   </form>
                 </div>
             </div>

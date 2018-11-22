@@ -33,7 +33,7 @@ class NavigationBar extends Component {
     }
 
     renderLogout() {
-        if (Cookies.get('loggedin') !== "false") {
+        if (Cookies.get('loggedin') === "true") {
             return (
                 <Link to="/logout">
                   <button class="btn btn-secondary" type="button">
@@ -71,9 +71,7 @@ class NavigationBar extends Component {
                         <a className="dropdown-item" >Something else here</a>
                       </div>
                     </li>
-                    <li className="nav-item">
-                      {this.renderLogout()}
-                    </li>
+                   
                 </ul>
                 <ul className="navbar-nav">
                     <li className="nav-item dropdown">
@@ -99,6 +97,8 @@ class NavigationBar extends Component {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
                     <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+                <a>"  "</a>
+                {this.renderLogout()}
               </div>
             </nav>
         );

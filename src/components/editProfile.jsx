@@ -6,20 +6,19 @@ import Cookies from 'js-cookie';
     constructor(props) {
         super(props);
         this.state = {
+            nickname: '',
             name: '',
             old_username: Cookies.get('user'),
             new_username: '', 
             email: '',
             password: '',
             address: '',
-            user: {},
             url: 'http://localhost:5000/Edit_Profile',
-            email_error_text: null,
-            password_error_text: null,
             error: "",
             updated: "false",
         }
         this.sendProfileInfo = this.sendProfileInfo.bind(this);
+        this.onNicknameChange = this.onNicknameChange.bind(this);
         this.onNameChange = this.onNameChange.bind(this);
         this.onUsernameChange = this.onUsernameChange.bind(this);
         this.onEmailChange = this.onEmailChange.bind(this);
@@ -46,6 +45,7 @@ import Cookies from 'js-cookie';
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            nickname: this.state.nickname,
             name: this.state.name,
             old_username: this.state.old_username,
             new_username : this.state.new_username,
@@ -55,6 +55,11 @@ import Cookies from 'js-cookie';
           })
       }).then((res) => {return res.json(); })
       .then((data) => {this.setState({error: data.error, updated: data.updated})});
+    }
+
+    onNicknameChange(event) {
+      this.setState({ nickname: event.target.value });
+      console.log(event.target.value);
     }
 
     onNameChange(event) {
@@ -93,12 +98,21 @@ import Cookies from 'js-cookie';
             <div className="container-fluid p-5">
                 <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this._handleKeyPress(e)}>
                   <form onSubmit={this.sendProfileInfo}>
+                    <FormGroup controlId="nickname" bsSize="large">
+                      <ControlLabel>Nickname</ControlLabel>
+                      <FormControl
+                        autoFocus
+                        type="nickname"
+                        value={this.state.nickname}
+                        onChange={this.onNicknameChange}
+                      />
+                    </FormGroup>
                     <FormGroup controlId="name" bsSize="large">
                       <ControlLabel>Name</ControlLabel>
                       <FormControl
                         autoFocus
                         type="name"
-                        value={this.state.user.name}
+                        value={this.state.name}
                         onChange={this.onNameChange}
                       />
                     </FormGroup>
@@ -134,7 +148,7 @@ import Cookies from 'js-cookie';
                         onChange={this.onAddressChange}
                       />
                     </FormGroup>
-                    <input className="my-3" type="submit" value="Update"/>
+                    <Button class="btn btn-primary" type="submit">Update</Button>
                   </form>
                 </div>
             </div>
