@@ -20,9 +20,52 @@ class App extends Component {
         this.state = {
             sortBy: 'title',
             searchParameter: "",
+            browseBy: 'all',
+            itemsCountPerPage: 10,
+            genre: 'All',
+            allGenres: ['Historical', 'Horror', 'Physics']
         }
+        this.updateItemsPerPage = this.updateItemsPerPage.bind(this);
+        this.updateBrowsing = this.updateBrowsing.bind(this);
         this.updateSorting = this.updateSorting.bind(this);
         this.searchBook = this.searchBook.bind(this);
+        this.updateGenre = this.updateGenre.bind(this);
+        this.getAllGenres = this.getAllGenres.bind(this);
+    }
+
+    getAllGenres(allBooks) {
+    
+      const newGenres = [];
+
+      allBooks.map((book) => {
+        if (!newGenres.includes(book.genre)) {
+            newGenres.push(book.genre);
+        }
+      });
+      // allBooks. Filter and get Genre, if Genre already exists, ignore. If it doesn't exist in array, append.  
+
+      // console.log(newGenres);
+        this.setState({ allGenres: newGenres });
+    }
+
+    updateGenre(option) {
+        this.setState({ 
+            genre: option,
+        });
+    }
+
+    updateItemsPerPage(option) {
+        this.setState({
+            itemsCountPerPage: option,
+        });
+    } 
+
+    updateBrowsing(option){
+        console.log("this is from the browsing function in the parent")
+        this.setState({
+            browseBy: option,
+            genre: 'All'
+        });
     }
 
     updateSorting(option){
@@ -31,18 +74,20 @@ class App extends Component {
             sortBy: option,
         });
     }
+
     searchBook(bookTitle){
         console.log("the data from the navigation bar is: " + bookTitle);
         this.setState({
             searchParameter: bookTitle,
         });
     }
+
     render() {
         return (
             <BrowserRouter>
              <div>
                  <div className="sticky-top">
-                    <NavigationBar isbn={this.state.dataFromChild} updateSorting={this.updateSorting} search={this.searchBook}/>
+                    <NavigationBar allGenres={this.state.allGenres} updateGenre={this.updateGenre} genre={this.state.genre} itemsCountPerPage={this.state.itemsCountPerPage} updateItemsPerPage={this.updateItemsPerPage} browseBy={this.state.browseBy} sortBy={this.state.sortBy} isbn={this.state.dataFromChild} updateSorting={this.updateSorting} updateBrowsing={this.updateBrowsing} search={this.searchBook} />
                  </div>
                  <div className="container-fluid">
                     <div className="row content">
@@ -52,7 +97,7 @@ class App extends Component {
                          <div className="col-sm-9">
                             <Route path={"/login"} component={LoginApp} />
                             <Route path={"/register"} component={registerApp} />
-                            <Route path={"/books"} render={() => <BookList sortBy={this.state.sortBy} searchTitle={this.state.searchParameter}/>} />
+                            <Route path={"/books"} render={() => <BookList getAllGenres={this.getAllGenres} genre={this.state.genre} itemsCountPerPage={this.state.itemsCountPerPage} sortBy={this.state.sortBy} browseBy={this.state.browseBy} searchTitle={this.state.searchParameter}/>} />
                             <Route path={"/book/:isbn"} render={(routeProps) => <BookPage {...routeProps}/>} />
                             <Route path={"/author/:id"} component={AuthorPage}/>
                             <Route path={"/user/:username"} component={userProfile}/>

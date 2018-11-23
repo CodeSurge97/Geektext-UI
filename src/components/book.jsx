@@ -109,7 +109,11 @@ class Book extends Component {
                                         edit={false}
                                         half={true}
                                         />
-                                </div>
+                                    </div>
+                                    <div className="flex-row">
+                                        <span><b>Genre: </b></span>
+                                        <span>{this.props.genre}</span>
+                                    </div>
                                 <div className="flex-row">
                                     <div className="mt-2" style={{fontSize: "14px"}} onClick={(event)=>{event.stopPropagation()}}>
                                         <ShowMore

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Book from './book';
 import Pagination from "react-js-pagination";
+import _ from 'lodash';
 
 class BookList extends Component {
 
@@ -10,79 +11,151 @@ class BookList extends Component {
             showMenu: false,
             library: [],
             sortBy: this.props.sortBy,
-            itemsPerPage: 5,
+            browseBy: this.props.browseBy,
+            itemsPerPage: 5000000,
+            totalItemsCount: 1,
             activePage: 1,
             totalCount: 10,
-
+            allBooks: null
         }
         this.fetchLibrary = this.fetchLibrary.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
-
     }
+
     componentDidMount(){
         fetch('http://localhost:5000/books/' + this.state.activePage + '/' + this.state.itemsPerPage,
         {credentials: 'include'})
         .then(res => res.json())
         .then(json => {
+
+            let y = this.state.activePage * this.props.itemsCountPerPage;
+            let x = y - this.props.itemsCountPerPage;
+
+            this.props.getAllGenres(json.books);
+
             this.setState({
-                library: json.books,
+                allBooks: json.books,
+                library: json.books.slice(x, y),
                 totalCount: json.totalNum,
+                totalItemsCount: json.books.length
             })
-            console.log(json.totalNum)
-        });
+            console.log(json.books)
+        })
     }
 
-    fetchLibrary(sortBy, pageNumber){
-        console.log("fetching data by" + sortBy)
-        let url = 'http://localhost:5000/books/' + pageNumber + '/' + this.state.itemsPerPage;
-        if(this.props.searchTitle == ""){
-            console.log("the search title is ''");
-            this.setState({sortBy: sortBy})
-            if(sortBy === 'priceD'){
-                url = 'http://localhost:5000/book/by-price-d/'  + pageNumber + '/' + this.state.itemsPerPage;
-            }else if(sortBy === 'priceA'){
-                url = 'http://localhost:5000/book/by-price-a/'  + pageNumber + '/' + this.state.itemsPerPage;
-            }else if(sortBy === 'ratingD'){
-                url = 'http://localhost:5000/book/by-rating-d/'  + pageNumber + '/' + this.state.itemsPerPage;
-            }else if(sortBy === 'ratingA'){
-                url = 'http://localhost:5000/book/by-rating-a/'  + pageNumber + '/' + this.state.itemsPerPage;
-            }else if(sortBy === 'author'){
-                url = 'http://localhost:5000/book/by-author/'  + pageNumber + '/' + this.state.itemsPerPage;
+    fetchLibrary(sortBy, pageNumber, browseBy) {
+
+        let newLibrary = null;
+
+        if (browseBy === 'all') {
+            newLibrary = this.state.allBooks;
+        } else if (browseBy === 'genre') {
+            if (this.props.genre !== 'All') {
+                newLibrary = _.filter(this.state.allBooks, (book) => {
+                    return book.genre === this.props.genre;
+                });
+            } else {
+                newLibrary = this.state.allBooks;
             }
-        }else{
-            console.log("this is from bookList and the book we are searching for is " + this.props.searchTitle)
-            url = 'http://localhost:5000/book/' + this.props.searchTitle;
+        } else if (browseBy === 'topSeller') {
+            newLibrary = _.filter(this.state.allBooks, (book) => {
+                if (book.title.includes("Pet Sematary") || book.title.includes("Fear:") || book.title.includes("Fire & Blood")) {
+                    return 1;
+                }
+            });
+        } else if (browseBy === 'topRated') {
+            newLibrary = _.filter(this.state.allBooks, (book) => {
+                return book.rating > 4.6;
+            });
         }
-        fetch(url, {credentials: 'include'}).then(res => res.json())
-        .then(json => {
-            this.setState({
-                library: json.books,
-            })
+
+        if (sortBy === 'title') {
+            newLibrary = _.orderBy(newLibrary, ['title'], ['asc']);
+        } else if (sortBy === 'author') {
+            newLibrary = _.orderBy(newLibrary, ['author'], ['asc']);
+        } else if (sortBy === 'priceA') {
+            newLibrary = _.orderBy(newLibrary, ['price'], ['asc']);
+        } else if (sortBy === 'priceD') {
+            newLibrary = _.orderBy(newLibrary, ['price'], ['desc']);
+        } else if (sortBy === 'ratingA') {
+            newLibrary = _.orderBy(newLibrary, ['rating'], ['asc']);
+        } else if (sortBy === 'ratingD') {
+            newLibrary = _.orderBy(newLibrary, ['rating'], ['desc']);
+        } else if (sortBy === 'releaseDateA') {
+            newLibrary = _.orderBy(newLibrary, ['date_pub'], ['asc']);
+        } else if (sortBy === 'releaseDateD') {
+            newLibrary = _.orderBy(newLibrary, ['date_pub'], ['desc']);
+        }
+        console.log(newLibrary);
+
+
+        let y = this.state.activePage * this.props.itemsCountPerPage;
+        let x = y - this.props.itemsCountPerPage;
+
+        this.setState({
+            library: newLibrary.slice(x, y),
+            totalItemsCount: newLibrary.length
         });
+
+
+        // let url = 'http://localhost:5000/books/' + pageNumber + '/' + this.state.itemsPerPage;
+        // if(this.props.searchTitle == ""){
+        //     console.log("the search title is ''");
+        //     this.setState({sortBy: sortBy})
+        //     if(sortBy === 'priceD'){
+        //         url = 'http://localhost:5000/book/by-price-d/'  + pageNumber + '/' + this.state.itemsPerPage;
+        //     }else if(sortBy === 'priceA'){
+        //         url = 'http://localhost:5000/book/by-price-a/'  + pageNumber + '/' + this.state.itemsPerPage;
+        //     }else if(sortBy === 'ratingD'){
+        //         url = 'http://localhost:5000/book/by-rating-d/'  + pageNumber + '/' + this.state.itemsPerPage;
+        //     }else if(sortBy === 'ratingA'){
+        //         url = 'http://localhost:5000/book/by-rating-a/'  + pageNumber + '/' + this.state.itemsPerPage;
+        //     }else if(sortBy === 'author'){
+        //         url = 'http://localhost:5000/book/by-author/'  + pageNumber + '/' + this.state.itemsPerPage;
+        //     }
+        // }else{
+        //     console.log("this is from bookList and the book we are searching for is " + this.props.searchTitle)
+        //     url = 'http://localhost:5000/book/' + this.props.searchTitle;
+        // }
+
+        // if browseBy === genre or topSeller or topRated. Filter.
+
+        //
+
+        // fetch call
+        // fetch(url, {credentials: 'include'}).then(res => res.json())
+        // .then(json => {
+
+        //     this.setState({
+        //         allBooks: json.books,
+        //         library: json.books, // all books shown in page
+        //     })
+        // });
     }
 
     componentDidUpdate(prevProps) {
       // Typical usage (don't forget to compare props):
-      if (this.props.sortBy !== prevProps.sortBy || this.props.searchTitle != prevProps.searchTitle) {
-        this.fetchLibrary(this.props.sortBy, this.state.activePage);
+      if (this.props.sortBy !== prevProps.sortBy || this.props.searchTitle !== prevProps.searchTitle || this.props.browseBy !== prevProps.browseBy || this.props.genre !== prevProps.genre || this.props.itemsCountPerPage !== prevProps.itemsCountPerPage) {
+        this.fetchLibrary(this.props.sortBy, this.state.activePage, this.props.browseBy);
       }
     }
 
     handlePageChange(pageNumber){
         console.log(pageNumber);
-        this.setState({ activePage: pageNumber});
-        this.fetchLibrary(this.state.sortBy, pageNumber);
-    }
+        this.setState({ activePage: pageNumber}, () => {
+            this.fetchLibrary(this.state.sortBy, pageNumber, this.state.browseBy);
+        });
+   }
 
     render() {
-        console.log(this.state.library);
+        console.log(this.props.itemsCountPerPage);
         return (
             <div className="mt-4">
                 <div className="row">
                     {/* This part is to show the list of books */}
                     {(this.state.library) ? this.state.library.map(book => (
                             <div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}} key={book.isbn}>
-                                <Book isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} rating={book.rating} callbackFromParent={this.myCallback}/>
+                                <Book genre={book.genre} isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} rating={book.rating} callbackFromParent={this.myCallback}/>
                             </div>
                     )) : null}
                 </div>
@@ -90,9 +163,9 @@ class BookList extends Component {
                     <div className="col-md-3 offset-sm-5 ">
                         <Pagination
                           activePage={this.state.activePage}
-                          itemsCountPerPage={this.state.itemsPerPage}
-                          totalItemsCount={this.state.totalCount}
-                          pageRangeDisplayed={5}
+                          itemsCountPerPage={this.props.itemsCountPerPage}
+                          totalItemsCount={this.state.totalItemsCount}
+                          pageRangeDisplayed={10000}
                           onChange={(n) => {this.handlePageChange(n)} }
                         />
                     </div>

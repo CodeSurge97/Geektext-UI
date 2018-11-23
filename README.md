@@ -30,9 +30,14 @@ Then go to the line containing "start": "react-scripts start", and add HOST=geek
 }
 ```
 
+```
+npm install --save lodash
+```
 
 Sources:
 
 https://github.com/facebook/create-react-app/issues/2954
 https://stackoverflow.com/questions/1134290/cookies-on-localhost-with-explicit-domain
 https://stackoverflow.com/questions/489369/can-i-use-localhost-as-the-domain-when-setting-an-http-cookie/489396
+
+
