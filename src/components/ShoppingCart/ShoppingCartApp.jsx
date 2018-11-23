@@ -15,9 +15,9 @@ class ShoppingCartApp extends Component {
             bookURL: "http://geek.localhost.com:3000/book/" + this.props.isbn,
         }
         this.fetch_cart = this.fetch_cart.bind(this);
-        
+
     }
-    
+
     fetch_cart(){
         fetch(this.state.url, {credentials: 'include'})
         .then(res => res.json())
@@ -38,7 +38,7 @@ class ShoppingCartApp extends Component {
             <h1>Shopping Cart for the user: {this.state.user}</h1>
             {this.state.items.map((item) =>
                 (<div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}}>
-                    <ShoppingCartItem img={item.img} count={item.count} title={item.book}/>
+                    <ShoppingCartItem img={item.img} count={item.count} title={item.book} isbn={item.isbn}/>
                 </div>)
             )}
             </div>
