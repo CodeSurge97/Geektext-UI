@@ -21,7 +21,7 @@ class Sidebar extends Component {
           hoverBgColor: "rgb(200, 200, 200)",
           selectionBgColor: "rgb(200, 200, 200)",
         };
-        
+
       if(Cookies.get('loggedin') === "true"){
         return (
           <div className="my-3 mt-5 " style={style}>
@@ -29,11 +29,14 @@ class Sidebar extends Component {
                         <Nav id="renderitems2">
                           <div onClick={() => {window.location = "/user/" + this.state.username}}>Profile</div>
                         </Nav>
+                        <Nav id="renderitems">
+                          <div onClick={() => {window.location = "/popular"}}>Popular</div>
+                        </Nav>
                       </SideNav>
               </div>
           );
         }
-        
+
         return (
         <div className="my-3 mt-5 " style={style}>
               <SideNav theme={theme} defaultSelectedPath={"home"}>
