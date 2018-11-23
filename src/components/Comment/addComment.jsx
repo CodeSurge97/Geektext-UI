@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import StarRatingComponent from 'react-star-rating-component';
+import ReactStars from 'react-stars';
+
 
 class AddComment extends Component {
 
@@ -36,47 +37,55 @@ class AddComment extends Component {
         console.log(event.target.value);
 
     }
-    onSendComment(){
+    onSendComment(event){
+        event.preventDefault();
         fetch((this.state.url), {
           method: 'POST',
+          credentials: 'include',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            user_id: this.state.id,
             content: this.state.text,
             isbn: this.state.isbn,
             rating: this.state.rating,
             anon: this.state.anon
           })
         })
+        console.log("Contents: " + this.state.text)
+        window.setTimeout(()=> (window.location = "http://geek.localhost.com:3000/book/" + this.state.isbn), 1000);
     }
     updateCharacters(length) {
         this.setState({
             charsRemaining: 1500 - length
         })
     }
-    onStarClick(nextValue, prevValue, name) {
+    onStarClick(nextValue) {
     this.setState({rating: nextValue});
     console.log(nextValue);
     }
     render() {
+        let styles = {
+            margin: '15px'
+        };
         return (
             <div>
-                <h1>Rate and Comment!</h1>
+                <h2>Rate and Comment!</h2>
                 <form onSubmit={this.onSendComment}>
                     <p>Choose what name you would like displayed:</p>
-                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="1" defaultChecked="true"/>Anonymous</label>
-                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="2"/>Username</label>
-                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="3"/>Nickname</label>
+                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="1" defaultChecked="true"/> Anonymous</label>
+                    <label style={styles}><input type="radio" onClick={this.onAnonChange} name="anon" value="2"/> Username</label>
+                    <label><input type="radio" onClick={this.onAnonChange} name="anon" value="3"/> Nickname</label>
                     <p>How was the book?</p>
-                    <StarRatingComponent
-                      name="rate1"
-                      starCount={5}
-                      value={this.state.rating}
-                      onStarClick={this.onStarClick.bind(this)}
-                    />
+                    <ReactStars
+                        count={5}
+                        value={this.state.rating}
+                        size={25}
+                        edit={true}
+                        onChange={this.onStarClick}
+                        half={false}
+                        />
                     <p>Tell us more about what you thought! (Character Limit: 1500)</p>
                     <textarea onChange={this.onTextChange} rows="4" cols="50" id="comment" name="comment" placeholder="Comment here!" maxLength="1500"></textarea><br/>
                     <span id="chars_left">Characters remaining: {this.state.charsRemaining}</span>
