@@ -22,17 +22,19 @@ class Sidebar extends Component {
           selectionBgColor: "rgb(200, 200, 200)",
         };
 
-        if (Cookies.get('loggedin') == "true") {
-        	return (
-                <div className="my-3 mt-5 " style={style}>
-            		<SideNav theme={theme} defaultSelectedPath={"home"}>
-            			<Nav id="renderitems2">
-            				<div onClick={() => {
-            						window.location = "/user/" + this.state.username
-            				}}>Profile</div>
-            			</Nav>
-            		</SideNav>
-        	    </div>);
+      if(Cookies.get('loggedin') === "true"){
+        return (
+          <div className="my-3 mt-5 " style={style}>
+                <SideNav theme={theme} defaultSelectedPath={"home"}>
+                        <Nav id="renderitems2">
+                          <div onClick={() => {window.location = "/user/" + this.state.username}}>Profile</div>
+                        </Nav>
+                        <Nav id="renderitems">
+                          <div onClick={() => {window.location = "/popular"}}>Popular</div>
+                        </Nav>
+                      </SideNav>
+              </div>
+          );
         }
 
         return (

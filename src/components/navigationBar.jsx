@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { Button } from "react-bootstrap";
+import {Link} from 'react-router-dom'
 import ShoppingCart from './ShoppingCart/shoppingCart'
+import Cookies from 'js-cookie';
 
 class NavigationBar extends Component {
 
@@ -35,7 +38,20 @@ class NavigationBar extends Component {
 
     }
 
+    renderLogout() {
+        if (Cookies.get('loggedin') === "true") {
+            return (
+                <Link to="/logout">
+                  <button class="btn btn-secondary" type="button">
+                     <a>Logout</a>
+                  </button>
+                </Link>
+            );
+        }
+    }
+
     render() {
+
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
               <a className="navbar-brand" href="/books" style={{color: "white", fontSize: "30px"}}>GeekText</a>
@@ -51,6 +67,7 @@ class NavigationBar extends Component {
                     <li className="nav-item">
                         <a className="nav-link" href="http://geek.localhost.com:3000/shopping-cart">Shopping Cart</a>
                     </li>
+
                 </ul>
                 <ul className="navbar-nav">
                     <li className="nav-item dropdown">
@@ -76,6 +93,8 @@ class NavigationBar extends Component {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={this.onSearchChange}/>
                     <button className="btn btn-outline-light my-2 my-sm-0" onClick={(event) => {event.preventDefault(); this.props.search(this.state.search_titel)}}type="submit">Search</button>
                 </form>
+                <a>"  "</a>
+                {this.renderLogout()}
               </div>
             </nav>
         );

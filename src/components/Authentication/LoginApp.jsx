@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
-import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
-//import { bindActionCreators } from 'redux';
 
 class LoginApp extends Component {
     constructor(props){
@@ -11,6 +9,7 @@ class LoginApp extends Component {
         this.state = {
            email: '',
            password: '',
+           username: '',
            url: "http://localhost:5000/login",
            email_error_text: null,
            password_error_text: null,
@@ -48,7 +47,7 @@ class LoginApp extends Component {
 
           })
       }).then((res) => {return res.json(); })
-      .then((data) => {this.setState({error: data.error, loggedin: data.loggedin})});
+      .then((data) => {this.setState({error: data.error, loggedin: data.loggedin, username: data.username})});
     }
 
     onEmailChange(event) {
@@ -64,10 +63,16 @@ class LoginApp extends Component {
     render() {
         if(this.state.loggedin !== "false"){
             console.log("redirecting")
-            Cookies.set("loggedin", "true");
-            Cookies.set("user", this.state.email);
+            Cookies.set('loggedin', "true");
             window.location = "http://geek.localhost.com:3000/books";
         }
+
+        if(Cookies.get('loggedin') === "true"){
+            console.log("redirecting")
+            Cookies.set('user', this.state.username);
+            window.location = "http://geek.localhost.com:3000/books";
+        }
+
         return (
         <div>
             <div className="container-fluid p-5">
@@ -90,7 +95,7 @@ class LoginApp extends Component {
                         type="password"
                       />
                     </FormGroup>
-                    <input className="my-3" type="submit" value="Login"/>
+                    <Button type="submit" class="btn btn-primary">Login</Button>
                   </form>
                 </div>
             </div>
