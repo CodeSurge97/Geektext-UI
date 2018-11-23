@@ -78,7 +78,7 @@ import Cookies from 'js-cookie';
     render() {
      if(this.state.validated !== "false"){
             console.log("redirecting")
-            window.location = "http://dev.geektext.com:3000/books";
+            window.location = "http://geek.localhost.com:3000/books";
             }
         return (
         <div>

@@ -97,7 +97,7 @@ import Cookies from 'js-cookie';
             console.log("redirecting")
             Cookies.set('loggedin', 'true');
             Cookies.set('user', this.state.username);
-            window.location = "http://dev.geektext.com:3000/books";
+            window.location = "http://geek.localhost.com:3000/books";
         }
         return (
         <div>

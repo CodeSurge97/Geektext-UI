@@ -17,7 +17,7 @@ class Logout extends Component {
  render() {
         if(Cookies.get('loggedin') !== "false"){
             console.log("redirecting")
-            window.location = "http://dev.geektext.com:3000/books";
+            window.location = "http://geek.localhost.com:3000/books";
             Cookies.set('loggedin', 'false')
         }
          return (null);

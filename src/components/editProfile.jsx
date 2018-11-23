@@ -91,7 +91,7 @@ import Cookies from 'js-cookie';
      if(this.state.updated !== "false"){
             console.log("redirecting")
             Cookies.set('user', this.state.new_username)
-            window.location = "http://dev.geektext.com:3000/user/" + this.state.new_username;
+            window.location = "http://geek.localhost.com:3000/user/" + this.state.new_username;
         }
         return (
         <div>

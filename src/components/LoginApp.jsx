@@ -64,13 +64,13 @@ class LoginApp extends Component {
         if(this.state.loggedin !== "false"){
             console.log("redirecting")
             Cookies.set('loggedin', "true");
-            window.location = "http://dev.geektext.com:3000/books";
+            window.location = "http://geek.localhost.com:3000/books";
         }
         
         if(Cookies.get('loggedin') === "true"){
             console.log("redirecting")
             Cookies.set('user', this.state.username);
-            window.location = "http://dev.geektext.com:3000/books";
+            window.location = "http://geek.localhost.com:3000/books";
         }
         
         return (
