@@ -88,7 +88,7 @@ class BookPage extends Component {
         }
         return (
             <div className="jumbotron" style={styles}>
-                <AddComment isbn={this.state.isbn}/>
+                <AddComment text={""} anon={1} rating={3} isbn={this.state.isbn}/>
             </div>
         );
     }
@@ -149,7 +149,7 @@ class BookPage extends Component {
                                 half={true}
                                 edit={false}
                                 />
-                            <span style={{fontSize: 13}}>({this.state.book.numRatings} {this.ratingSingularOrPlural(this.state.book.numRatings)})</span>
+                            <span style={{fontSize: 13}}>{Math.round(100 * this.state.book.rating) / 100} ({this.state.book.numRatings} {this.ratingSingularOrPlural(this.state.book.numRatings)})</span>
                         </div>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 15}}>Publication Date: </span>
