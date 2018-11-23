@@ -190,7 +190,6 @@ class NavigationBar extends Component {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={this.onSearchChange}/>
                     <button className="btn btn-outline-light my-2 my-sm-0" onClick={(event) => {event.preventDefault(); this.props.search(this.state.search_titel)}}type="submit">Search</button>
                 </form> */}
-                <a>"  "</a>
                 {this.renderLogout()}
               </div>
             </nav>
