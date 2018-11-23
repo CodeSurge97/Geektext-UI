@@ -140,7 +140,7 @@ class BookPage extends Component {
                             <span>{this.state.book.genre}</span>
                         </div>
                         <div className="container" style={{padding: '10px', backgroundColor: 'white', lineHeight: "30px",}}>
-                            <div style={{fontSize: 20}} className="d-inline-block align-middle">Rating:</div>
+                            <div style={{fontSize: 20}} className="d-inline-block align-middle">Rating:&nbsp;</div>
                             <ReactStars
                                 className="d-inline-block align-middle"
                                 count={5}
@@ -149,7 +149,7 @@ class BookPage extends Component {
                                 half={true}
                                 edit={false}
                                 />
-                            <span style={{fontSize: 13}}>{Math.round(100 * this.state.book.rating) / 100} ({this.state.book.numRatings} {this.ratingSingularOrPlural(this.state.book.numRatings)})</span>
+                            <span className="align-middle" style={{fontSize: 13}}>&nbsp;&nbsp;{Math.round(100 * this.state.book.rating) / 100} ({this.state.book.numRatings} {this.ratingSingularOrPlural(this.state.book.numRatings)})</span>
                         </div>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 15}}>Publication Date: </span>
