@@ -167,9 +167,9 @@ class NavigationBar extends Component {
                         <div className="dropdown-divider"></div>
                         <a className="dropdown-item" onClick={() => { this.props.updateSorting('ratingA') }}>Rating (Low to High)</a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('releaseA') }}>Release Date (New to Old)</a>
+                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('releaseD') }}>Release Date (New to Old)</a>
                         <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('releaseD') }}>Release Date (Old to New)</a>
+                        <a className="dropdown-item" onClick={() => { this.props.updateSorting('releaseA') }}>Release Date (Old to New)</a>
                       </div>
                     </li>
 

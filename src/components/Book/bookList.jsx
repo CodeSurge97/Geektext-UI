@@ -81,10 +81,10 @@ class BookList extends Component {
             newLibrary = _.orderBy(newLibrary, ['rating'], ['asc']);
         } else if (sortBy === 'ratingD') {
             newLibrary = _.orderBy(newLibrary, ['rating'], ['desc']);
-        } else if (sortBy === 'releaseDateA') {
-            newLibrary = _.orderBy(newLibrary, ['date_pub'], ['asc']);
-        } else if (sortBy === 'releaseDateD') {
-            newLibrary = _.orderBy(newLibrary, ['date_pub'], ['desc']);
+        } else if (sortBy === 'releaseA') {
+            newLibrary = _.orderBy(newLibrary, ['date'], ['asc']);
+        } else if (sortBy === 'releaseD') {
+            newLibrary = _.orderBy(newLibrary, ['date'], ['desc']);
         }
         console.log(newLibrary);
 
@@ -155,7 +155,7 @@ class BookList extends Component {
                     {/* This part is to show the list of books */}
                     {(this.state.library) ? this.state.library.map(book => (
                             <div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}} key={book.isbn}>
-                                <Book genre={book.genre} isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} rating={book.rating} callbackFromParent={this.myCallback}/>
+                                <Book date={book.date} genre={book.genre} isbn={book.isbn} title={book.title} author={book.author} price={book.price} image={book.img} description={book.description} rating={book.rating} callbackFromParent={this.myCallback}/>
                             </div>
                     )) : null}
                 </div>

@@ -29,9 +29,6 @@ class Sidebar extends Component {
                         <Nav id="renderitems2">
                           <div onClick={() => {window.location = "/user/" + this.state.username}}>Profile</div>
                         </Nav>
-                        <Nav id="renderitems">
-                          <div onClick={() => {window.location = "/popular"}}>Popular</div>
-                        </Nav>
                       </SideNav>
               </div>
           );
@@ -49,11 +46,6 @@ class Sidebar extends Component {
             			<div onClick={() => {
             					window.location = "/register"
             				}}>Register</div>
-            		</Nav>
-            		<Nav id="renderitems">
-            			<div onClick={() => {
-            					window.location = "/popular"
-            				}}>Popular</div>
             		</Nav>
             	</SideNav>
             </div>);

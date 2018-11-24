@@ -10,6 +10,7 @@ class Book extends Component {
         this.state = {
             title: this.props.title,
             author: this.props.author,
+            date: this.props.date,
             price: this.props.price,
             img: this.props.image,
             isbn: this.props.isbn,
@@ -98,6 +99,10 @@ class Book extends Component {
                                 <div className="flex-row">
                                     <span><b>Price: </b></span>
                                     <span>${this.state.price}</span>
+                                </div>
+                                <div className="flex-row">
+                                    <span><b>date: </b></span>
+                                    <span>{this.state.date}</span>
                                 </div>
                                 <div className="flex-row">
                                     <div className="d-inline-block align-middle"><b>Rating:  </b></div>
