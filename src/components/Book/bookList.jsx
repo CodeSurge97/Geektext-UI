@@ -81,10 +81,10 @@ class BookList extends Component {
             newLibrary = _.orderBy(newLibrary, ['rating'], ['asc']);
         } else if (sortBy === 'ratingD') {
             newLibrary = _.orderBy(newLibrary, ['rating'], ['desc']);
-        } else if (sortBy === 'releaseDateA') {
-            newLibrary = _.orderBy(newLibrary, ['date_pub'], ['asc']);
-        } else if (sortBy === 'releaseDateD') {
-            newLibrary = _.orderBy(newLibrary, ['date_pub'], ['desc']);
+        } else if (sortBy === 'releaseA') {
+            newLibrary = _.orderBy(newLibrary, ['date'], ['asc']);
+        } else if (sortBy === 'releaseD') {            
+            newLibrary = _.orderBy(newLibrary, ['date'], ['desc']);
         }
         console.log(newLibrary);
 
