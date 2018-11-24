@@ -101,10 +101,6 @@ class Book extends Component {
                                     <span>${this.state.price}</span>
                                 </div>
                                 <div className="flex-row">
-                                    <span><b>date: </b></span>
-                                    <span>{this.state.date}</span>
-                                </div>
-                                <div className="flex-row">
                                     <div className="d-inline-block align-middle"><b>Rating:  </b></div>
                                     <ReactStars
                                         className="d-inline-block align-middle"
