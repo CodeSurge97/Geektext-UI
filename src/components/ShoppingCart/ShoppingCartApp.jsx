@@ -24,7 +24,8 @@ class ShoppingCartApp extends Component {
         .then(json => {
             this.setState({
                 user: json.user_name,
-                items: json.items
+                items: json.items,
+                
             })
         });
     }
@@ -38,9 +39,10 @@ class ShoppingCartApp extends Component {
             <h1>Shopping Cart for the user: {this.state.user}</h1>
             {this.state.items.map((item) =>
                 (<div className="col-md-12 d-flex justify-content-between" style={{padding: "5px"}}>
-                    <ShoppingCartItem img={item.img} count={item.count} title={item.book} isbn={item.isbn}/>
+                    <ShoppingCartItem  img={item.img} count={item.count} title={item.book} isbn={item.isbn}/>
                 </div>)
             )}
+            
             </div>
         );
     }

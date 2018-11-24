@@ -10,7 +10,7 @@ class ShoppingCartItem extends Component {
             title: this.props.title,
             img: this.props.img,
             url: 'http://localhost:5000/remove-from-cart',
-            isbn: this.props.isbn,
+            isbn: this.props.isbn
             //You obviously need to specify an isbn here to be able to use this.state.isbn
         }
         this.removeItemFromShoppingCart = this.removeItemFromShoppingCart.bind(this);
@@ -62,11 +62,9 @@ class ShoppingCartItem extends Component {
                         <Col>
                             {this.state.title}
                             <br></br>
-                            <span>{this.state.count}</span>
-                            <br></br>
+                            <span>Qty: {this.state.count}</span>
+                            
                             <ButtonToolbar >
-                                <Button bsStyle="primary" bsSize="xsmall">Update Quantity</Button>
-                                <Button bsStyle="primary" bsSize="xsmall">Remove</Button>
                                 <div className="d-flex mt-3" style={{zIndex: "1"}}>
                                     <div className="flex-row">
                                         <form onSubmit={this.removeItemFromShoppingCart}>
