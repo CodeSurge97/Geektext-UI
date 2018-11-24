@@ -38,8 +38,8 @@ class BookPage extends Component {
     enlarge(event){
 
         this.setState({
-            width: 220 * 1.25,
-            height: 250 * 1.5,
+            width: 220 * 1.5,
+            height: 250 * 1.75,
         }, () => {
             document.addEventListener('click', this.minimize);
         });
@@ -120,10 +120,10 @@ class BookPage extends Component {
             <div className="jumbotron mt-3" style={styles.s}>
                 <h1>{this.state.book.title}</h1>
                 <div className="row align-items-center container-fluid">
-                    <div className="col-md-auto align-self-start mt-4">
+                    <div className="col-md-auto align-self-start ml-2 mt-4 mb-3">
                         <img onClick={() => {this.enlarge()}} src={"http://localhost:5000" + this.state.book.img} alt={this.state.book.img} width={this.state.width} height={this.state.height} className="float-left"/>
                     </div>
-                    <div className="col-8" style={styles.t}>
+                    <div className="col-md-6 mx-4" style={styles.t}>
                         <div className="container" style={styles.t}>
                             <span style={{fontSize: 20}}>Author: </span>
                             <a href={"http://geek.localhost.com:3000/author/" + this.state.author_id}>{this.state.book.author}</a>
@@ -159,6 +159,8 @@ class BookPage extends Component {
                             <span style={{fontSize: 15}}>Publisher: </span>
                             <span style={{fontSize: 15}}>{this.state.book.publisher}</span>
                         </div>
+                    </div>
+                    <div className="row align-items-center container-fluid">
                         <div className="container" style={styles.s}>
                             <span style={{fontSize: 17}}>Book Description: </span>
                             <ShowMore
