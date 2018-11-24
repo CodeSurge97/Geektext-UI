@@ -65,7 +65,7 @@ class BookList extends Component {
             });
         } else if (browseBy === 'topRated') {
             newLibrary = _.filter(this.state.allBooks, (book) => {
-                return book.rating > 4.6;
+                return book.rating > 3.8;
             });
         }
 
