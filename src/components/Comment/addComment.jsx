@@ -74,7 +74,7 @@ class AddComment extends Component {
         };
         return (
             <div>
-                <h1>Rate and Comment!</h1>
+                <h2>Rate and Comment!</h2>
                 <form onSubmit={this.onSendComment}>
                     <p style={textColor}><strong>You can only rate and comment once, so if you have already submitted a rating
                     and a comment, that would be overwritten by this one!</strong></p>
