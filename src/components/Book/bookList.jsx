@@ -86,7 +86,10 @@ class BookList extends Component {
         } else if (sortBy === 'releaseD') {
             newLibrary = _.orderBy(newLibrary, ['date'], ['desc']);
         }
+        console.log('LA PUTA QUE LA REMIL PARIO')
         console.log(newLibrary);
+        console.log(newLibrary.slice(x, y));
+        console.log(this.state.activePage);
 
 
         let y = this.state.activePage * this.props.itemsCountPerPage;
@@ -136,14 +139,22 @@ class BookList extends Component {
     componentDidUpdate(prevProps) {
       // Typical usage (don't forget to compare props):
       if (this.props.sortBy !== prevProps.sortBy || this.props.searchTitle !== prevProps.searchTitle || this.props.browseBy !== prevProps.browseBy || this.props.genre !== prevProps.genre || this.props.itemsCountPerPage !== prevProps.itemsCountPerPage) {
-        this.fetchLibrary(this.props.sortBy, this.state.activePage, this.props.browseBy);
+        
+        if (this.props.itemsCountPerPage !== prevProps.itemsCountPerPage) {
+            this.setState({ activePage: 1}, () => {
+                this.fetchLibrary(this.props.sortBy, this.state.activePage, this.props.browseBy);
+            });
+        } else {
+            this.fetchLibrary(this.props.sortBy, this.state.activePage, this.props.browseBy);
+        }
+        
       }
     }
 
     handlePageChange(pageNumber){
         console.log(pageNumber);
         this.setState({ activePage: pageNumber}, () => {
-            this.fetchLibrary(this.state.sortBy, pageNumber, this.state.browseBy);
+            this.fetchLibrary(this.props.sortBy, pageNumber, this.props.browseBy);
         });
    }
 
