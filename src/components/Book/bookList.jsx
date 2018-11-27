@@ -86,7 +86,6 @@ class BookList extends Component {
         } else if (sortBy === 'releaseD') {
             newLibrary = _.orderBy(newLibrary, ['date'], ['desc']);
         }
-        console.log('LA PUTA QUE LA REMIL PARIO')
         console.log(newLibrary);
         console.log(newLibrary.slice(x, y));
         console.log(this.state.activePage);
